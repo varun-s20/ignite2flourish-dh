@@ -133,7 +133,7 @@ The three latest articles are picked automatically.
 
 ### Draft copy
 
-Any copy the client hasn't approved yet is marked `"draft": true` in the content files. In the preview build, the **Review build → Show draft notes** button (bottom-left), or `?notes=1`, outlines each draft block on the page. The draft items are:
+Any copy the client hasn't approved yet is marked `"draft": true` in the content files. The draft items (also listed in the client message that goes with the preview) are:
 - the hero and the "Why Ignite2Flourish" statement;
 - the Topics and Start Here intros;
 - What I'm Exploring Now (placeholders for Sanzid's own themes);

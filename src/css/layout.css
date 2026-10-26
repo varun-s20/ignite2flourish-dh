@@ -1,5 +1,5 @@
 /* Page frame: container, sections, header, menu, footer, search dialog,
-   toast and the preview-build badge. */
+   and toast. */
 
 .container {
   width: 100%;
@@ -88,21 +88,17 @@
   background: var(--dark);
   height: var(--header-h);
 }
+/* fixed to the top at all times; .header-shell keeps its place in the flow */
 .site-header {
-  position: absolute;
+  position: fixed;
   inset: 0 0 auto;
   height: var(--header-h);
   color: var(--on-dark);
   background: var(--dark);
+  transition: background-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
-.site-header.is-pinned {
-  position: fixed;
-  transform: translateY(-105%);
+.site-header.is-stuck {
   box-shadow: 0 1px 0 var(--dark-line);
-}
-.site-header.is-pinned.is-shown {
-  transform: none;
-  transition: transform 0.45s var(--ease-out-cubic);
 }
 .site-header__inner {
   height: 100%;
@@ -125,7 +121,7 @@
   inset: 0 0 auto;
   background: transparent;
 }
-.page-home .site-header:not(.is-pinned) {
+.page-home .site-header:not(.is-stuck) {
   background: transparent;
 }
 .site-nav {
@@ -641,59 +637,3 @@
   transform: translate(-50%, 0);
 }
 
-.preview-badge {
-  position: fixed;
-  left: 16px;
-  bottom: 16px;
-  z-index: 90;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 6px 6px 14px;
-  border-radius: var(--pill);
-  background: rgba(25, 48, 70, 0.92);
-  color: #fff;
-  font-size: 0.8rem;
-  backdrop-filter: blur(8px);
-}
-.preview-badge__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--sun);
-  box-shadow: 0 0 0 4px rgba(255, 217, 0, 0.25);
-}
-.preview-badge__toggle {
-  min-height: 32px;
-  padding: 6px 12px;
-  border-radius: var(--pill);
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-}
-.preview-badge__toggle[aria-pressed="true"] {
-  background: var(--sun);
-  color: var(--navy);
-}
-.show-notes [data-draft] {
-  outline: 2px dashed var(--ember);
-  outline-offset: 6px;
-  position: relative;
-}
-.show-notes [data-draft]::before {
-  content: attr(data-draft);
-  position: absolute;
-  z-index: 5;
-  top: -14px;
-  left: 8px;
-  padding: 2px 8px;
-  border-radius: 4px;
-  background: var(--ember);
-  color: #fff;
-  font: 500 11px/1.4 var(--f-mono);
-  letter-spacing: 0.02em;
-  text-transform: none;
-  white-space: nowrap;
-  max-width: calc(100% - 16px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-}

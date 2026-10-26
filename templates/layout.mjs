@@ -122,19 +122,10 @@ function footer(ctx, path) {
   </footer>`;
 }
 
-function previewBadge(ctx) {
-  if (ctx.env !== "preview") return "";
-  return `<aside class="preview-badge" aria-label="Review build tools" data-preview-badge>
-    <span class="preview-badge__dot" aria-hidden="true"></span>
-    <span>Review build</span>
-    <button type="button" class="preview-badge__toggle" data-notes-toggle aria-pressed="false">Show draft notes</button>
-  </aside>`;
-}
-
 // Runs before first paint. `motion` turns on the hidden start states of the
 // scroll animations; if site.js never confirms it is running, the class is
 // removed again so nothing can stay invisible.
-const NO_FLASH = `(function(d,h){h.classList.add("js");try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){h.classList.add("motion");setTimeout(function(){if(!window.I2F_MOTION)h.classList.remove("motion")},2500)}}catch(e){}try{var q=location.search;if(/[?&]notes=1/.test(q))sessionStorage.setItem("i2f-notes","1");if(/[?&]notes=0/.test(q))sessionStorage.removeItem("i2f-notes");if(sessionStorage.getItem("i2f-notes")==="1")h.classList.add("show-notes")}catch(e){}})(document,document.documentElement);`;
+const NO_FLASH = `(function(d,h){h.classList.add("js");try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){h.classList.add("motion");setTimeout(function(){if(!window.I2F_MOTION)h.classList.remove("motion")},2500)}}catch(e){}})(document,document.documentElement);`;
 
 /**
  * @param {object} ctx  build context
@@ -205,7 +196,6 @@ ${page.content}
   ${footer(ctx, page.path)}
   ${searchDialog(ctx)}
   <div class="toast" data-toast role="status" aria-live="polite" hidden></div>
-  ${previewBadge(ctx)}
 </body>
 </html>
 `;

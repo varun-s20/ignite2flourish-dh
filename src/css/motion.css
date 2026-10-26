@@ -146,10 +146,6 @@ em .rc-char {
   --rc-to: var(--plum);
 }
 
-.site-header {
-  will-change: transform;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

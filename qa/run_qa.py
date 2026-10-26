@@ -81,12 +81,9 @@ def main():
         page.goto(BASE + "/ideas/", wait_until="networkidle")
         page.mouse.wheel(0, 1600)
         page.wait_for_timeout(400)
-        cls = lambda: page.evaluate("document.querySelector('[data-header]').className")
-        hidden = "is-pinned" in cls() and "is-shown" not in cls()
-        page.mouse.wheel(0, -300)
-        page.wait_for_timeout(400)
-        shown = "is-pinned" in cls() and "is-shown" in cls()
-        check("header stays out of the way on scroll down and returns (pinned) on scroll up", hidden and shown, (hidden, shown))
+        top = page.evaluate("document.querySelector('[data-header]').getBoundingClientRect().top")
+        solid = page.evaluate("document.querySelector('[data-header]').classList.contains('is-stuck')")
+        check("header stays fixed at the top while scrolling", top == 0 and solid, (top, solid))
 
         # ---------------------------------------------------- search dialog
         page.goto(BASE + "/", wait_until="networkidle")

@@ -85,26 +85,4 @@
     if (document.readyState !== "loading") fn();
     else document.addEventListener("DOMContentLoaded", fn);
   };
-
-  /* Preview build: toggle the draft-copy annotations. */
-  I2F.ready(function () {
-    var toggle = I2F.$("[data-notes-toggle]");
-    if (!toggle) return;
-    var sync = function () {
-      var on = root.classList.contains("show-notes");
-      toggle.setAttribute("aria-pressed", String(on));
-      toggle.textContent = on ? "Hide draft notes" : "Show draft notes";
-    };
-    sync();
-    toggle.addEventListener("click", function () {
-      var on = root.classList.toggle("show-notes");
-      try {
-        if (on) sessionStorage.setItem("i2f-notes", "1");
-        else sessionStorage.removeItem("i2f-notes");
-      } catch (e) {
-        /* storage unavailable: the toggle still works for this page */
-      }
-      sync();
-    });
-  });
 })();

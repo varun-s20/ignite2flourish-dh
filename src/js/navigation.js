@@ -11,27 +11,14 @@
     var main = I2F.$("main");
     var footer = I2F.$(".site-footer");
 
-    /* ---- header: sits in the page at the top; once you have scrolled past
-       it, it slides back in (fixed) whenever you scroll up */
-    var shell = header && header.parentElement;
-    if (header && shell) {
-      var lastY = window.scrollY;
+    /* ---- header: always fixed to the top; it only gains its solid
+       background (and a hairline) once the page has moved, so on the home
+       page it floats clear over the hero until then */
+    if (header) {
       var ticking = false;
       var update = function () {
-        var y = window.scrollY;
-        var menuOpen = toggle && toggle.getAttribute("aria-expanded") === "true";
-        var limit = shell.offsetTop + shell.offsetHeight;
-        if (y <= shell.offsetTop) {
-          header.classList.remove("is-pinned", "is-shown");
-        } else if (y > limit + 160) {
-          header.classList.add("is-pinned");
-          if (y < lastY - 4 || menuOpen || header.contains(document.activeElement)) header.classList.add("is-shown");
-          else if (y > lastY + 4) header.classList.remove("is-shown");
-        } else if (!header.classList.contains("is-shown")) {
-          header.classList.remove("is-pinned");
-        }
-        lastY = y;
         ticking = false;
+        header.classList.toggle("is-stuck", window.scrollY > 8);
       };
       window.addEventListener(
         "scroll",
@@ -43,9 +30,6 @@
         },
         { passive: true }
       );
-      header.addEventListener("focusin", function () {
-        if (header.classList.contains("is-pinned")) header.classList.add("is-shown");
-      });
       update();
     }
 
