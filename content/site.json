@@ -1,0 +1,210 @@
+{
+  "name": "Ignite2Flourish",
+  "tagline": "Ideas for a more thoughtful working life",
+  "description": "Ideas on leadership, careers and professional growth from Sanzid Ahmed, a senior HR and people leader — connecting research, experience and new perspectives.",
+  "url": "https://ignite2flourish.com",
+  "basePath": "",
+  "locale": "en-AU",
+  "language": "en",
+  "environment": "preview",
+  "since": 2022,
+  "defaultAuthor": "sanzid-ahmed",
+  "defaultOgImage": "/assets/images/og-default.jpg",
+  "nav": [
+    {
+      "label": "Ideas",
+      "href": "/ideas/",
+      "match": [
+        "/ideas/",
+        "/tag/"
+      ],
+      "matchArticles": true
+    },
+    {
+      "label": "Books & Research",
+      "href": "/books-research/",
+      "match": [
+        "/books-research/"
+      ]
+    },
+    {
+      "label": "About",
+      "href": "/about/",
+      "match": [
+        "/about/"
+      ]
+    },
+    {
+      "label": "Continue the Conversation",
+      "href": "/contact/",
+      "match": [
+        "/contact/"
+      ],
+      "style": "outline"
+    }
+  ],
+  "forms": {
+    "contact": {
+      "endpoint": "",
+      "_note": "Leave empty for the preview build. Set to a form handler URL (WordPress REST route, Formspree, etc.) to send real submissions — see README › Forms."
+    },
+    "responses": {
+      "endpoint": "",
+      "_note": "Public responses need a moderated backend (WordPress comments). Empty = preview mode, nothing is stored."
+    }
+  },
+  "archive": {
+    "pageSize": 6
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Ideas for a more thoughtful working life",
+      "headline": "A more thoughtful way to *flourish* at work.",
+      "lede": "Ideas on leadership, careers and professional growth — connecting research, experience and new perspectives.",
+      "primary": {
+        "label": "Explore the latest ideas",
+        "href": "/ideas/"
+      },
+      "secondary": {
+        "label": "Browse books & research",
+        "href": "/books-research/"
+      },
+      "portrait": "hero",
+      "caption": "Sanzid Ahmed — Senior HR & People Leader",
+      "draft": true
+    },
+    "featured": "rethinking-recruitment-moving-beyond-experience-bias",
+    "latestCount": 3,
+    "why": {
+      "eyebrow": "Why Ignite2Flourish",
+      "statement": "Most of us know what good practice looks like. The harder part is applying it — in a real organisation, with real people, on an ordinary Tuesday. Ignite2Flourish connects workplace best practice and research with *22 years of lived experience* in HR.",
+      "pillars": [
+        {
+          "title": "Experience",
+          "text": "Lessons from local, regional and global HR leadership roles across Australia, the UK, Hong Kong, New Zealand, Indonesia, Bangladesh and Pakistan."
+        },
+        {
+          "title": "Evidence",
+          "text": "Books and research papers read closely, summarised fairly, and kept separate from opinion."
+        },
+        {
+          "title": "Application",
+          "text": "Practical ideas for professionals who want to progress — and for those who feel a little stuck, or are simply going with the flow."
+        }
+      ],
+      "draft": true,
+      "stats": [
+        {
+          "value": "22",
+          "label": "Years in local, regional and global HR roles",
+          "tone": "ember"
+        },
+        {
+          "value": "100+",
+          "label": "Countries represented among colleagues across a career",
+          "tone": "navy"
+        },
+        {
+          "value": "{essays}",
+          "label": "Essays published on Ignite2Flourish",
+          "tone": "sun"
+        }
+      ],
+      "_statsNote": "Facts from the current About page. \"{essays}\" is replaced by the live count of published articles."
+    },
+    "exploring": {
+      "intro": "Two questions I keep returning to at the moment. Updated as my thinking moves on.",
+      "items": [
+        {
+          "title": "Hiring for potential, not just experience",
+          "note": "Why do so many organisations still hire for an exact role match — and what would it take to select for learning, collaboration and the ability to lead change instead?",
+          "links": [
+            "rethinking-recruitment-moving-beyond-experience-bias"
+          ]
+        },
+        {
+          "title": "From languishing to flourishing at work",
+          "note": "The space between ‘not unwell’ and ‘thriving’ is where many capable professionals live. What moves people out of it — and what keeps them there?",
+          "links": [
+            "how-to-transform-your-life-from-languishing-to-flourishing",
+            "the-mental-health-continuum"
+          ]
+        }
+      ],
+      "draft": true,
+      "invite": "A question from your own working life, a study worth reading, a book that changed your mind — suggestions shape what I explore next."
+    },
+    "startHere": {
+      "intro": "New here? Three pieces that show what Ignite2Flourish is about — one from each theme.",
+      "items": [
+        "how-to-transform-your-life-from-languishing-to-flourishing",
+        "is-too-much-information-tmi-holding-you-back-take-these-6-steps-to-move-forward",
+        "creating-a-growth-mindset"
+      ]
+    },
+    "conversation": {
+      "headline": "Agree? Disagree? Have an experience that complicates the argument?",
+      "text": "Ideas get better in conversation. Write to Sanzid directly — to respond to an article, explore a collaboration, or ask about a podcast, panel or speaking opportunity.",
+      "cta": {
+        "label": "Continue the conversation",
+        "href": "/contact/"
+      },
+      "draft": true
+    }
+  },
+  "footer": {
+    "statement": "An independent publication on leadership, careers and flourishing at work.",
+    "columns": [
+      {
+        "title": "Sections",
+        "links": [
+          {
+            "label": "Home",
+            "href": "/"
+          },
+          {
+            "label": "Ideas",
+            "href": "/ideas/"
+          },
+          {
+            "label": "Books & Research",
+            "href": "/books-research/"
+          },
+          {
+            "label": "About",
+            "href": "/about/"
+          },
+          {
+            "label": "Continue the Conversation",
+            "href": "/contact/"
+          }
+        ]
+      },
+      {
+        "title": "Themes",
+        "links": [
+          {
+            "label": "Work & Leadership",
+            "href": "/ideas/work-leadership/"
+          },
+          {
+            "label": "Career & Life",
+            "href": "/ideas/career-life/"
+          },
+          {
+            "label": "Flourishing",
+            "href": "/ideas/flourishing/"
+          },
+          {
+            "label": "Search",
+            "href": "/search/"
+          },
+          {
+            "label": "RSS feed",
+            "href": "/feed.xml"
+          }
+        ]
+      }
+    ]
+  }
+}

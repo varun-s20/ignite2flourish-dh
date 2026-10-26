@@ -1,0 +1,179 @@
+/* Motion. Start states only apply under html.motion, which the inline head
+   script sets when the visitor has not asked for reduced motion (and removes
+   again if site.js fails to start), so content can never stay hidden.
+     blur-in   700ms ease, y -20px, blur 5px → 0   (page headers, staggered)
+     slide-up  1000ms ease-out-quart, y 60px → 0, 300ms default delay       */
+
+.motion [data-anim] {
+  transition-delay: var(--delay, 0ms);
+}
+.motion [data-anim="blur-in"] {
+  transition-property: opacity, transform, filter;
+  transition-duration: 0.7s;
+  transition-timing-function: var(--ease);
+}
+.motion [data-anim="blur-in"]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(-20px);
+  filter: blur(5px);
+}
+.motion [data-anim="slide-up"] {
+  --delay: 300ms;
+  transition-property: opacity, transform;
+  transition-duration: 1s;
+  transition-timing-function: var(--ease-out-quart);
+}
+.motion [data-anim="slide-up"]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(60px);
+}
+/* once settled, hand transitions back to hover effects */
+.motion [data-anim].is-done {
+  transition: background-color 0.3s var(--ease), box-shadow 0.5s var(--ease-out-cubic), transform 0.5s var(--ease-out-cubic);
+  filter: none;
+}
+
+/* gravity hero: the portrait rises in as the light behind him warms up;
+   the mark waits for motion.js (it is shown at rest if that never runs) */
+.motion .gravity__img {
+  animation: g-rise 1.5s var(--ease-out-quart) 0.1s backwards;
+}
+.motion .gravity__glow {
+  animation: g-warm 2.4s var(--ease-out-quart) backwards;
+}
+.motion .gravity__halo circle {
+  animation: g-halo 2.8s var(--ease-out-quart) 0.2s backwards;
+  transform-origin: 50% 50%;
+}
+.motion .gravity__orb {
+  opacity: 0;
+}
+@keyframes g-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6%) scale(1.02);
+  }
+}
+@keyframes g-warm {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+}
+@keyframes g-halo {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+/* contact stage: the arch rises, he steps in, the flame disc pops */
+.motion .cstage__arch {
+  animation: c-arch 1.4s var(--ease-out-quart) 0.15s backwards;
+}
+.motion .cstage__figure img {
+  animation: g-rise 1.5s var(--ease-out-quart) 0.35s backwards;
+}
+.motion .cstage__cta {
+  animation: c-pop 0.9s var(--ease-out-back) 0.9s backwards;
+}
+@keyframes c-arch {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 30%) scale(0.92);
+  }
+}
+@keyframes c-pop {
+  from {
+    transform: scale(0);
+  }
+}
+
+/* Ideas: the themes spiral out from the essays; Books: the sun rises and
+   the covers are dealt into a fan */
+.motion .orbit__rings {
+  animation: g-halo 1.6s var(--ease-out-quart) 0.2s backwards;
+}
+.motion .orbit__core {
+  animation: c-pop 0.9s var(--ease-out-back) 0.25s backwards;
+}
+.motion .orbit__body {
+  animation: o-out 1.5s var(--ease-out-quart) calc(0.45s + var(--i) * 0.14s) backwards;
+}
+@keyframes o-out {
+  from {
+    opacity: 0;
+    transform: rotate(calc(var(--a) - 150deg)) translateX(0) rotate(calc(150deg - var(--a)));
+  }
+}
+.motion .shelf__arch {
+  animation: s-rise 1.3s var(--ease-out-quart) 0.15s backwards;
+}
+.motion .shelf__sun {
+  animation: s-rise 1.6s var(--ease-out-quart) 0.3s backwards;
+}
+.motion .shelf__slot {
+  animation: s-deal 1s var(--ease-out-quart) calc(0.55s + var(--i) * 0.1s) backwards;
+}
+@keyframes s-rise {
+  from {
+    opacity: 0;
+    transform: translateY(45%) scale(0.8);
+  }
+}
+@keyframes s-deal {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--x) - 50%)) translateY(30cqi) rotate(0deg);
+  }
+}
+
+/* numbers wait for their card */
+.motion [data-anim]:not(.is-in) .odo__col {
+  transform: none;
+  transition: none;
+}
+
+/* scroll-coloured statement (letters darken as it moves up the screen) */
+.rc-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.rc-char {
+  color: color-mix(in srgb, var(--rc-to, var(--ink)) calc(var(--p, 0) * 100%), var(--reveal-from));
+}
+em .rc-char {
+  --rc-to: var(--plum);
+}
+
+.site-header {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee__track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+  }
+  .marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .marquee__list[aria-hidden="true"] {
+    display: none;
+  }
+  .marquee__list {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+}

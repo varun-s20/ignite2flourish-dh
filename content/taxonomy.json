@@ -1,0 +1,57 @@
+{
+  "categories": {
+    "work-leadership": {
+      "name": "Work & Leadership",
+      "description": "Decision-making, hiring, culture and the everyday practice of leading people well.",
+      "motif": "structure",
+      "order": 1
+    },
+    "career-life": {
+      "name": "Career & Life",
+      "description": "Goals, momentum and growth for professionals who want to progress — or feel a little stuck.",
+      "motif": "path",
+      "order": 2
+    },
+    "flourishing": {
+      "name": "Flourishing",
+      "description": "Wellbeing, self-awareness and positive psychology — what it takes to thrive rather than simply get by.",
+      "motif": "bloom",
+      "order": 3
+    }
+  },
+
+  "reviewTypes": {
+    "book-review": { "name": "Books", "singular": "Book review", "slug": "books" },
+    "research-review": { "name": "Research", "singular": "Research review", "slug": "research" }
+  },
+
+  "tags": {
+    "balance": "Balance",
+    "bias": "Bias",
+    "career-development": "Career development",
+    "decision-making": "Decision-making",
+    "emotional-intelligence": "Emotional intelligence",
+    "feedback": "Feedback",
+    "focus": "Focus",
+    "goal-setting": "Goal-setting",
+    "growth-mindset": "Growth mindset",
+    "hr-practice": "HR practice",
+    "information-overload": "Information overload",
+    "intentions": "Intentions",
+    "intuition": "Intuition",
+    "languishing": "Languishing",
+    "leadership": "Leadership",
+    "mindfulness": "Mindfulness",
+    "momentum": "Momentum",
+    "positive-psychology": "Positive psychology",
+    "psychological-safety": "Psychological safety",
+    "recruitment": "Recruitment",
+    "reflection": "Reflection",
+    "resilience": "Resilience",
+    "self-awareness": "Self-awareness",
+    "self-compassion": "Self-compassion",
+    "teams": "Teams",
+    "wellbeing": "Wellbeing",
+    "workplace-practice": "Workplace practice"
+  }
+}

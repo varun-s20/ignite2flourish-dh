@@ -1,0 +1,25 @@
+{
+  "name": "ignite2flourish",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ignite2Flourish — custom HTML/CSS/JS publication site (pre-WordPress design phase).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:production": "node scripts/build.mjs --production",
+    "dev": "node scripts/serve.mjs --watch",
+    "serve": "node scripts/serve.mjs",
+    "check": "node scripts/build.mjs && node scripts/check.mjs",
+    "images": "python scripts/images.py",
+    "fonts": "python scripts/fonts.py",
+    "og": "python scripts/og.py",
+    "qa": "python qa/run_qa.py"
+  },
+  "devDependencies": {
+    "axe-core": "^4.14.0",
+    "lighthouse": "^12.8.2"
+  }
+}

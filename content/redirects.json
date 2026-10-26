@@ -1,0 +1,18 @@
+{
+  "_note": "301 redirects from URLs on the current ignite2flourish.com that change or retire in the new build. Article URLs (/<slug>/) are unchanged and need no redirect. Generated into dist/_redirects and migration/redirects.csv, and honoured by the local server.",
+  "rules": [
+    { "from": "/blog/", "to": "/ideas/", "reason": "Blog index becomes the Ideas archive" },
+    { "from": "/home/", "to": "/", "reason": "Old Home page slug" },
+    { "from": "/coaching/", "to": "/about/", "reason": "Mentoring service page unpublished (old offer)" },
+    { "from": "/energy-leadership-assessment/", "to": "/about/", "reason": "ELI assessment page unpublished (old offer)" },
+    { "from": "/free-session/", "to": "/contact/", "reason": "Mentoring session booking unpublished (old offer)" },
+    { "from": "/freebie/", "to": "/", "reason": "Lead magnet page unpublished" },
+    { "from": "/one-more-step/", "to": "/", "reason": "Newsletter confirmation step unpublished" },
+    { "from": "/confirmed/", "to": "/", "reason": "Newsletter confirmation page unpublished" },
+    { "from": "/request-sent/", "to": "/contact/", "reason": "Booking confirmation unpublished" },
+    { "from": "/whoops/", "to": "/", "reason": "Error page from the old form flow" },
+    { "from": "/cookies/", "to": "/privacy/#cookie-policy", "reason": "Cookie policy merged into the Privacy page" },
+    { "from": "/feed/", "to": "/feed.xml", "reason": "RSS feed location" },
+    { "from": "/comments/feed/", "to": "/feed.xml", "reason": "Comment feed retired" }
+  ]
+}

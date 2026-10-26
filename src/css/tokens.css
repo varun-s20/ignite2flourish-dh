@@ -1,0 +1,120 @@
+/* Design tokens.
+   Base design: the agreed SwiftForm-style system (dark plum frame, pill
+   buttons, scroll motion). Decluttered with the spacing and restraint of
+   cherylcran.com. Every colour is from the Ignite2Flourish style guide
+   (ember, sun, navy, plum, deep plum) or a tint of one of them. */
+
+@font-face {
+  font-family: "Aspekta";
+  src: url("../assets/fonts/Aspekta-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aspekta";
+  src: url("../assets/fonts/Aspekta-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../assets/fonts/GeistMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../assets/fonts/GeistMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+/* "Main Heading" face from the client's style guide. Supplied by the client;
+   needs a URW web-font licence before launch (README › Fonts). */
+@font-face {
+  font-family: "I2F Display";
+  src: url("../assets/fonts/NimbusSansDiagDOT-Reg.otf") format("opentype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- brand (style guide) */
+  --ember: #e34c20;
+  /* ember darkened just enough to pass 4.5:1 as small text on white */
+  --ember-text: #b93b16;
+  --sun: #ffd900;
+  --navy: #193046;
+  --plum: #63324a;
+  --plum-deep: #3d1529;
+
+  /* ---- surfaces */
+  --bg: #ffffff;
+  --bg-soft: #f6f1ec;
+  --bg-soft-2: #ebe2da;
+  --cream: #fff8ee;
+  --dark: var(--plum-deep);
+  --dark-2: #4a1c33;
+  --dark-3: #592640;
+  --dark-line: rgba(255, 255, 255, 0.12);
+
+  /* pastel card tints, one per brand colour */
+  --tint-ember: #fbded3;
+  --tint-sun: #fff3c2;
+  --tint-plum: #eee0e7;
+  --tint-navy: #e1e8ef;
+
+  /* ---- text */
+  --ink: var(--navy);
+  --ink-soft: #3c4f62;
+  --muted: #5b6573;
+  --reveal-from: #8f858b;
+  --on-dark: #ffffff;
+  --on-dark-muted: #d9c6d0;
+  --on-dark-faint: #b59cab;
+  --line: #e7e0da;
+
+  /* the logo's flame */
+  --flame: linear-gradient(180deg, #ffd900 0%, #f6a21c 45%, #e34c20 100%);
+
+  /* ---- type */
+  --f-display: "I2F Display", "Aspekta", "Helvetica Neue", Arial, sans-serif;
+  --f-sans: "Aspekta", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --fs-display: clamp(2.1rem, 1.15rem + 3.7vw, 4.4rem);
+  --fs-h1: clamp(2.05rem, 1.35rem + 2.3vw, 3.25rem);
+  --fs-h2: clamp(2.1rem, 1.3rem + 2.6vw, 3.375rem);
+  --fs-statement: clamp(1.6rem, 1rem + 2.2vw, 3rem);
+  --fs-title1: clamp(1.5rem, 1.2rem + 0.9vw, 2rem);
+  --fs-title2: clamp(1.25rem, 1.1rem + 0.45vw, 1.5rem);
+  --fs-lead: 1.125rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+
+  /* ---- layout */
+  --container: 1280px;
+  --container-narrow: 1064px;
+  --read: 720px;
+  --gutter: clamp(20px, 4.4vw, 80px);
+  --section: clamp(96px, 10vw, 144px);
+  --radius-sm: 8px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --pill: 999px;
+  --shadow: 0 18px 50px -28px rgba(25, 48, 70, 0.3), 0 2px 8px -4px rgba(25, 48, 70, 0.08);
+
+  /* ---- motion (curves taken from the reference interactions) */
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
+  --ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  --header-h: 80px;
+}

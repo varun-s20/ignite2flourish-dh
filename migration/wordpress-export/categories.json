@@ -1,0 +1,152 @@
+[
+ {
+  "id": 1,
+  "count": 12,
+  "description": "",
+  "link": "https://ignite2flourish.com/category/uncategorized/",
+  "name": "Uncategorized",
+  "slug": "uncategorized",
+  "taxonomy": "category",
+  "parent": 0,
+  "meta": [],
+  "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v28.7 - https://yoast.com/product/yoast-seo-wordpress/ -->\n<title>Uncategorized Archives - Ignite2Flourish</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://ignite2flourish.com/category/uncategorized/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Uncategorized Archives - Ignite2Flourish\" />\n<meta property=\"og:url\" content=\"https://ignite2flourish.com/category/uncategorized/\" />\n<meta property=\"og:site_name\" content=\"Ignite2Flourish\" />\n<meta property=\"og:image\" content=\"https://i0.wp.com/ignite2flourish.com/wp-content/uploads/home-feature.jpg?fit=1714%2C1076&ssl=1\" />\n\t<meta property=\"og:image:width\" content=\"1714\" />\n\t<meta property=\"og:image:height\" content=\"1076\" />\n\t<meta property=\"og:image:type\" content=\"image/jpeg\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https:\\/\\/schema.org\",\"@graph\":[{\"@type\":\"CollectionPage\",\"@id\":\"https:\\/\\/ignite2flourish.com\\/category\\/uncategorized\\/\",\"url\":\"https:\\/\\/ignite2flourish.com\\/category\\/uncategorized\\/\",\"name\":\"Uncategorized Archives - Ignite2Flourish\",\"isPartOf\":{\"@id\":\"http:\\/\\/box5409.temp.domains\\/~ignitfb7\\/#website\"},\"breadcrumb\":{\"@id\":\"https:\\/\\/ignite2flourish.com\\/category\\/uncategorized\\/#breadcrumb\"},\"inLanguage\":\"en-US\"},{\"@type\":\"BreadcrumbList\",\"@id\":\"https:\\/\\/ignite2flourish.com\\/category\\/uncategorized\\/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https:\\/\\/ignite2flourish.com\\/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Uncategorized\"}]},{\"@type\":\"WebSite\",\"@id\":\"http:\\/\\/box5409.temp.domains\\/~ignitfb7\\/#website\",\"url\":\"http:\\/\\/box5409.temp.domains\\/~ignitfb7\\/\",\"name\":\"Ignite2Flourish\",\"description\":\"Sanzid Ahmed\",\"publisher\":{\"@id\":\"http:\\/\\/box5409.temp.domains\\/~ignitfb7\\/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"http:\\/\\/box5409.temp.domains\\/~ignitfb7\\/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"en-US\"},{\"@type\":\"Organization\",\"@id\":\"http:\\/\\/box5409.temp.domains\\/~ignitfb7\\/#organization\",\"name\":\"Ignite2Flourish\",\"url\":\"http:\\/\\/box5409.temp.domains\\/~ignitfb7\\/\",\"logo\":{\"@type\":\"ImageObject\",\"inLanguage\":\"en-US\",\"@id\":\"http:\\/\\/box5409.temp.domains\\/~ignitfb7\\/#\\/schema\\/logo\\/image\\/\",\"url\":\"https:\\/\\/i0.wp.com\\/ignite2flourish.com\\/wp-content\\/uploads\\/logo.png?fit=400%2C235&ssl=1\",\"contentUrl\":\"https:\\/\\/i0.wp.com\\/ignite2flourish.com\\/wp-content\\/uploads\\/logo.png?fit=400%2C235&ssl=1\",\"width\":400,\"height\":235,\"caption\":\"Ignite2Flourish\"},\"image\":{\"@id\":\"http:\\/\\/box5409.temp.domains\\/~ignitfb7\\/#\\/schema\\/logo\\/image\\/\"}}]}</script>\n<!-- / Yoast SEO plugin. -->",
+  "yoast_head_json": {
+   "title": "Uncategorized Archives - Ignite2Flourish",
+   "robots": {
+    "index": "index",
+    "follow": "follow",
+    "max-snippet": "max-snippet:-1",
+    "max-image-preview": "max-image-preview:large",
+    "max-video-preview": "max-video-preview:-1"
+   },
+   "canonical": "https://ignite2flourish.com/category/uncategorized/",
+   "og_locale": "en_US",
+   "og_type": "article",
+   "og_title": "Uncategorized Archives - Ignite2Flourish",
+   "og_url": "https://ignite2flourish.com/category/uncategorized/",
+   "og_site_name": "Ignite2Flourish",
+   "og_image": [
+    {
+     "width": 1714,
+     "height": 1076,
+     "url": "https://i0.wp.com/ignite2flourish.com/wp-content/uploads/home-feature.jpg?fit=1714%2C1076&ssl=1",
+     "type": "image/jpeg"
+    }
+   ],
+   "twitter_card": "summary_large_image",
+   "schema": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "CollectionPage",
+      "@id": "https://ignite2flourish.com/category/uncategorized/",
+      "url": "https://ignite2flourish.com/category/uncategorized/",
+      "name": "Uncategorized Archives - Ignite2Flourish",
+      "isPartOf": {
+       "@id": "http://box5409.temp.domains/~ignitfb7/#website"
+      },
+      "breadcrumb": {
+       "@id": "https://ignite2flourish.com/category/uncategorized/#breadcrumb"
+      },
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "https://ignite2flourish.com/category/uncategorized/#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://ignite2flourish.com/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Uncategorized"
+       }
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "http://box5409.temp.domains/~ignitfb7/#website",
+      "url": "http://box5409.temp.domains/~ignitfb7/",
+      "name": "Ignite2Flourish",
+      "description": "Sanzid Ahmed",
+      "publisher": {
+       "@id": "http://box5409.temp.domains/~ignitfb7/#organization"
+      },
+      "potentialAction": [
+       {
+        "@type": "SearchAction",
+        "target": {
+         "@type": "EntryPoint",
+         "urlTemplate": "http://box5409.temp.domains/~ignitfb7/?s={search_term_string}"
+        },
+        "query-input": {
+         "@type": "PropertyValueSpecification",
+         "valueRequired": true,
+         "valueName": "search_term_string"
+        }
+       }
+      ],
+      "inLanguage": "en-US"
+     },
+     {
+      "@type": "Organization",
+      "@id": "http://box5409.temp.domains/~ignitfb7/#organization",
+      "name": "Ignite2Flourish",
+      "url": "http://box5409.temp.domains/~ignitfb7/",
+      "logo": {
+       "@type": "ImageObject",
+       "inLanguage": "en-US",
+       "@id": "http://box5409.temp.domains/~ignitfb7/#/schema/logo/image/",
+       "url": "https://i0.wp.com/ignite2flourish.com/wp-content/uploads/logo.png?fit=400%2C235&ssl=1",
+       "contentUrl": "https://i0.wp.com/ignite2flourish.com/wp-content/uploads/logo.png?fit=400%2C235&ssl=1",
+       "width": 400,
+       "height": 235,
+       "caption": "Ignite2Flourish"
+      },
+      "image": {
+       "@id": "http://box5409.temp.domains/~ignitfb7/#/schema/logo/image/"
+      }
+     }
+    ]
+   }
+  },
+  "_links": {
+   "self": [
+    {
+     "href": "https://ignite2flourish.com/wp-json/wp/v2/categories/1",
+     "targetHints": {
+      "allow": [
+       "GET"
+      ]
+     }
+    }
+   ],
+   "collection": [
+    {
+     "href": "https://ignite2flourish.com/wp-json/wp/v2/categories"
+    }
+   ],
+   "about": [
+    {
+     "href": "https://ignite2flourish.com/wp-json/wp/v2/taxonomies/category"
+    }
+   ],
+   "wp:post_type": [
+    {
+     "href": "https://ignite2flourish.com/wp-json/wp/v2/posts?categories=1"
+    }
+   ],
+   "curies": [
+    {
+     "name": "wp",
+     "href": "https://api.w.org/{rel}",
+     "templated": true
+    }
+   ]
+  }
+ }
+]
