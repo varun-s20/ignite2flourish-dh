@@ -175,32 +175,38 @@
           "name": "Saïd Business School",
           "sub": "University of Oxford",
           "what": "Executive Leadership Programme",
-          "style": "serif"
+          "style": "serif",
+          "icon": "cap"
         },
         {
           "name": "Macquarie University",
           "what": "Neuroscience of Leadership",
-          "style": "sans"
+          "style": "sans",
+          "icon": "cap"
         },
         {
           "name": "Australian HR Institute",
           "what": "Professional member, MAHRI",
-          "style": "caps"
+          "style": "caps",
+          "icon": "people"
         },
         {
           "name": "International Coaching Federation",
           "what": "Member",
-          "style": "serif"
+          "style": "serif",
+          "icon": "chat"
         },
         {
           "name": "Coursera",
           "what": "The Science of Well-Being",
-          "style": "round"
+          "style": "round",
+          "icon": "screen"
         },
         {
           "name": "Authentic Education",
           "what": "Accelerated Coaching Certification",
-          "style": "caps"
+          "style": "caps",
+          "icon": "star"
         }
       ]
     },

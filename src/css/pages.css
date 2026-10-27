@@ -500,10 +500,10 @@ svg.num-card__art {
 }
 /* the years: one bar per year, rising, the latest lit */
 svg.num-card__art--years {
-  top: 9%;
-  left: 7%;
+  top: 8%;
+  left: 30%;
   right: auto;
-  width: 86%;
+  width: 64%;
   stroke: none;
   fill: rgba(255, 255, 255, 0.24);
 }
@@ -557,6 +557,62 @@ svg.num-card__art--years .is-now {
   font-size: 1.0625rem;
   line-height: 1.35;
   opacity: 0.88;
+}
+/* what the number counts, as an icon in a glass circle */
+.num-card__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+}
+.num-card__icon .icon {
+  width: 22px;
+  height: 22px;
+}
+.num-card--navy .num-card__icon {
+  color: var(--sun);
+}
+/* phones: one card per row; the art gets its own band at the top and the
+   icon, number and label sit centred below it */
+@media (max-width: 759px) {
+  .numbers__grid {
+    gap: 14px;
+  }
+  .num-card {
+    justify-items: center;
+    min-height: 0;
+    padding: 132px 22px 26px;
+    text-align: center;
+  }
+  .num-card__icon {
+    margin-bottom: 8px;
+  }
+  .num-card__value {
+    font-size: clamp(3.2rem, 14vw, 4.2rem);
+  }
+  .num-card__label {
+    margin-top: 6px;
+  }
+  .num-card .num-card__art {
+    top: 18px;
+    right: auto;
+    left: 50%;
+    width: auto;
+    height: 100px;
+    transform: translateX(-50%);
+  }
+  .num-card .num-card__art--map {
+    top: 14px;
+    width: auto;
+    height: 104px;
+  }
 }
 
 /* ------------------------------------------------- about (spotlight) */
@@ -754,14 +810,27 @@ svg.num-card__art--years .is-now {
 }
 .learning__tile {
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
   gap: 16px;
-  min-height: clamp(150px, 14vw, 190px);
+  min-height: clamp(170px, 16vw, 220px);
   padding: clamp(18px, 2vw, 26px);
   border: 1px solid var(--dark-line);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.03);
   transition: border-color 0.35s var(--ease), background-color 0.35s var(--ease), transform 0.5s var(--ease-out-quart);
+}
+.learning__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 217, 0, 0.12);
+  color: var(--sun);
+}
+.learning__icon .icon {
+  width: 22px;
+  height: 22px;
 }
 .learning__tile:hover {
   border-color: rgba(255, 217, 0, 0.45);
@@ -802,6 +871,40 @@ svg.num-card__art--years .is-now {
   color: var(--on-dark-faint);
   font-size: 0.875rem;
   line-height: 1.4;
+}
+/* phones: one tidy row per institution, icon on the left */
+@media (max-width: 599px) {
+  .learning__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .learning__tile {
+    grid-template-columns: 44px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 14px;
+    row-gap: 4px;
+    align-items: center;
+    min-height: 0;
+    padding: 16px 18px;
+  }
+  .learning__icon {
+    grid-row: span 2;
+  }
+  .learning__name {
+    display: block;
+    font-size: 1.1rem;
+  }
+  .learning__name span {
+    display: block;
+    margin-top: 2px;
+  }
+  .learning__name--caps {
+    font-size: 0.95rem;
+  }
+  .learning__what {
+    padding-top: 0;
+    border-top: 0;
+  }
 }
 
 /* ------------------------------------------------- exploring (cards) */

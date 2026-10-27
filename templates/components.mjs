@@ -29,6 +29,7 @@ const ICONS = {
   sprout: '<path d="M12 20v-8"/><path d="M12 12c0-3.6-2.6-6-6.5-6 0 3.6 2.6 6 6.5 6Z"/><path d="M12 14.5c0-3.3 2.4-5.5 6-5.5 0 3.3-2.4 5.5-6 5.5Z"/>',
   briefcase: '<rect x="3.5" y="7" width="17" height="12.5" rx="2"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3.5 12.5h17"/>',
   globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.2-3.4-8.5s1.1-6.1 3.4-8.5Z"/>',
+  screen: '<rect x="3.5" y="4.5" width="17" height="11.5" rx="1.8"/><path d="M8.5 20h7M12 16v4"/><path d="m10.5 8.2 3.6 2.1-3.6 2.1z"/>',
   cap: '<path d="m2.5 9.5 9.5-4.5 9.5 4.5-9.5 4.5z"/><path d="M6.5 11.5v4.2c1.4 1.4 3.3 2.1 5.5 2.1s4.1-.7 5.5-2.1v-4.2M21.5 9.5v5"/>',
 };
 
@@ -166,6 +167,8 @@ export const NUMBER_ART = {
     .join("")}</svg>`,
 };
 
+const NUMBER_ICONS = { years: "briefcase", world: "globe", pages: "pen", route: "path" };
+
 export function numCards(ctx, items) {
   const value = (v) => (v === "{essays}" ? String(ctx.data.articles.length) : v);
   return `<ul class="numbers__grid">${items
@@ -173,6 +176,7 @@ export function numCards(ctx, items) {
       const art = typeof NUMBER_ART[s.art] === "function" ? NUMBER_ART[s.art](ctx) : NUMBER_ART[s.art] || "";
       return `<li class="num-card num-card--${s.tone}" data-anim="slide-up" data-delay="${200 + i * 100}">
         ${art}
+        <span class="num-card__icon" aria-hidden="true">${icon(NUMBER_ICONS[s.art] || "star")}</span>
         <p class="num-card__value">${odometer(value(s.value))}</p>
         <p class="num-card__label">${esc(s.label)}</p>
       </li>`;

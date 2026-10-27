@@ -168,6 +168,7 @@ function learning(ctx) {
       <ul class="learning__grid"${draft(l.draft)}>${l.items
         .map(
           (x, i) => `<li class="learning__tile" data-anim="slide-up" data-delay="${150 + i * 70}">
+          <span class="learning__icon" aria-hidden="true">${icon(x.icon || "cap")}</span>
           <p class="learning__name learning__name--${esc(x.style || "sans")}">${esc(x.name)}${x.sub ? `<span>${esc(x.sub)}</span>` : ""}</p>
           <p class="learning__what">${esc(x.what)}</p>
         </li>`,

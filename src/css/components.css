@@ -395,7 +395,9 @@ a.kicker:hover {
   height: 1em;
   line-height: 1;
   vertical-align: top;
-  clip-path: inset(0 -0.4em);
+  /* a little room below for the display face's overhang; neighbouring
+     digits sit 0.3em apart so none of them peeks in */
+  clip-path: inset(-0.02em -0.4em -0.14em);
 }
 .odo__digit {
   position: relative;
@@ -413,12 +415,12 @@ a.kicker:hover {
   align-items: center;
   width: 2em;
   margin-left: -1em;
-  transform: translateY(calc(var(--n) * -1em));
+  transform: translateY(calc(var(--n) * -1.3em));
   transition: transform 1.6s var(--ease-out-quart);
   transition-delay: calc(var(--d, 0) * 90ms + 300ms);
 }
 .odo__col span {
-  height: 1em;
+  height: 1.3em;
   line-height: 1;
 }
 .odo__static {
