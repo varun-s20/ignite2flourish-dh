@@ -9,6 +9,8 @@ import {
   faq,
   icon,
   linkedinIcon,
+  NUMBER_ART,
+  numCards,
   odometer,
   picture,
   roll,
@@ -29,7 +31,7 @@ export function aboutPage(ctx) {
   const a = ctx.data.authors[ctx.data.site.defaultAuthor];
   const background = paragraphs(p.parts.background);
   const motivation = paragraphs(p.parts.motivation);
-  const note = draft(p.draft, "Adapted from the current About page — to be replaced by the client’s supplied copy");
+  const note = draft(p.draft, "Adapted from the current About page, to be replaced by the client’s supplied copy");
   const EXPERTISE_ICONS = ["people", "chat", "pen", "flame"];
 
   const content = `<section class="page-hero page-hero--about dark" aria-labelledby="about-title">
@@ -47,6 +49,7 @@ export function aboutPage(ctx) {
       <div class="about-gallery">
         <div class="about-gallery__a media" data-anim="blur-in" data-delay="100">${picture(ctx, "about-wide", { alt: "Sanzid Ahmed in a navy suit, smiling", sizes: "(min-width: 992px) 290px, 45vw", priority: true })}</div>
         <div class="about-gallery__b badge-card" data-anim="blur-in" data-delay="200">
+          ${NUMBER_ART.years}
           <p class="badge-card__value">${odometer("22")}</p>
           <p class="badge-card__label">years in HR &amp; people leadership</p>
         </div>
@@ -58,24 +61,16 @@ export function aboutPage(ctx) {
   <section class="section" aria-labelledby="bg-title">
     <div class="container">
       <div class="split-head"${note}>
-        <h2 class="tag" id="bg-title" data-anim="slide-up">Background</h2>
+        <h2 class="h2" id="bg-title" data-anim="slide-up">Background</h2>
         <div class="split-head__body">
-          <p class="statement-sm" data-reveal-chars data-anim="slide-up">${esc(background[0] || "")}</p>
+          <p class="split-head__lead" data-anim="slide-up">${esc(background[0] || "")}</p>
           ${background
             .slice(1)
             .map((t) => `<p class="split-head__text" data-anim="slide-up">${esc(t)}</p>`)
             .join("")}
         </div>
       </div>
-      <ul class="stats stats--three">${(p.stats || [])
-        .slice(0, 3)
-        .map(
-          (s, i) => `<li class="stat-card stat-card--${s.tone}" data-anim="slide-up" data-delay="${300 + i * 100}">
-          <p class="stat-card__value">${odometer(s.value)}</p>
-          <p class="stat-card__label">${esc(s.label)}</p>
-        </li>`,
-        )
-        .join("")}</ul>
+      ${numCards(ctx, (p.stats || []).slice(0, 3))}
     </div>
   </section>
 
@@ -83,7 +78,6 @@ export function aboutPage(ctx) {
     <div class="split__media">${picture(ctx, "about-statement", { alt: "Sanzid Ahmed, arms folded, in a blue blazer", sizes: "(min-width: 900px) 50vw, 100vw", cls: "picture--top" })}</div>
     <div class="split__panel dark">
       <div class="split__inner"${note}>
-        <p class="tag" data-anim="slide-up">Why Ignite2Flourish</p>
         <h2 class="split__title" id="why-i2f-title" data-anim="slide-up">A place to think out loud</h2>
         ${motivation.map((t) => `<p data-anim="slide-up">${esc(t)}</p>`).join("")}
       </div>
@@ -93,7 +87,7 @@ export function aboutPage(ctx) {
   <section class="section" aria-labelledby="philosophy-title">
     <div class="container">
       <div class="split-head">
-        <h2 class="tag" id="philosophy-title" data-anim="slide-up">Philosophy</h2>
+        <h2 class="h2" id="philosophy-title" data-anim="slide-up">Philosophy</h2>
         <figure class="split-head__body quote">
           <blockquote><p class="why__statement" data-reveal-chars>${esc(p.philosophy.quote)}</p></blockquote>
           <figcaption data-anim="slide-up">${esc(p.philosophy.attribution)}</figcaption>
@@ -128,7 +122,6 @@ export function aboutPage(ctx) {
   <section class="section journey" aria-labelledby="cred-title" data-journey>
     <div class="container journey__grid">
       <div class="journey__head">
-        <p class="tag" data-anim="slide-up">Credentials</p>
         <h2 class="h2" id="cred-title" data-anim="slide-up">Education &amp; training</h2>
       </div>
       <div class="journey__wrap" data-anim="slide-up" data-delay="300">
@@ -176,7 +169,6 @@ export function contactPage(ctx) {
   const content = `<section class="cstage" aria-labelledby="contact-title" data-cstage>
     <div class="cstage__dome dark">
       <div class="container cstage__head">
-        <p class="mono cstage__eyebrow" data-anim="blur-in" data-delay="100">${esc(p.eyebrow)}</p>
         <h1 class="display contact-hero__title cstage__title" id="contact-title" data-anim="blur-in" data-delay="150">${inline(p.headline)}</h1>
         <div class="cstage__intro" data-anim="blur-in" data-delay="250"${draft(p.draft)}>${ctx.prose(p.body)}</div>
       </div>
@@ -188,15 +180,15 @@ export function contactPage(ctx) {
         <source type="image/webp" srcset="${set}" sizes="${sizes}">
         <img src="${ctx.u(`/assets/images/${name}-760.png`)}" sizes="${sizes}" width="1100" height="2046" alt="Sanzid Ahmed, arms folded, smiling" loading="eager" fetchpriority="high">
       </picture>
-      <a class="cstage__cta" href="#write"><span class="cstage__cta-orbit" aria-hidden="true"><i></i></span><span class="cstage__cta-text">Let’s<strong>talk</strong></span></a>
+      <a class="cstage__cta" href="#write"><span class="cstage__cta-text">Let’s<strong>talk</strong></span></a>
     </div>
   </section>
 
   <section class="section cwrite" id="write" aria-labelledby="write-title">
     <div class="container cwrite__grid">
       <div class="cwrite__aside">
-        <h2 class="tag" id="write-title" data-anim="slide-up">What brings you here?</h2>
-        <p class="cwrite__lead" data-anim="slide-up">Pick a starting point and the subject is filled in for you. Or just write.</p>
+        <h2 class="h2 cwrite__title" id="write-title" data-anim="slide-up">What brings you here?</h2>
+        <p class="cwrite__lead" data-anim="slide-up">Pick one and the subject fills itself in.</p>
         <ul class="reasons" data-anim="slide-up">${p.reasons
           .map(
             (r, i) => `<li><a class="reason" href="#c-message" data-pick-subject="${esc(p.subjects[i] || r.title)}">
@@ -265,7 +257,7 @@ export function contactPage(ctx) {
         },
         {
           q: "What kinds of conversation are welcome?",
-          a: `<p>${p.reasons.map((r) => esc(r.title)).join(", ")}. Disagreement is welcome — some of the best ideas start as objections.</p>`,
+          a: `<p>${p.reasons.map((r) => esc(r.title)).join(", ")}. Disagreement is welcome. Some of the best ideas start as objections.</p>`,
         },
         {
           q: "Can I suggest a book or research paper?",
@@ -304,7 +296,6 @@ export function legalPage(ctx, slug) {
     content: `<section class="page-hero page-hero--compact dark">
       <div class="container container--narrow">
         <div class="page-hero__head">
-          <p class="tag tag--dark" data-anim="blur-in" data-delay="100">${esc(p.eyebrow)}</p>
           <h1 class="display" data-anim="blur-in" data-delay="100">${esc(p.title)}</h1>
           ${p.notice ? `<div class="notice notice--review" role="note" data-anim="blur-in" data-delay="200"><p><strong>Before launch:</strong> ${esc(p.notice)}</p></div>` : ""}
         </div>
@@ -333,7 +324,6 @@ export function searchPage(ctx) {
     content: `<section class="page-hero page-hero--compact dark">
       <div class="container container--narrow">
         <div class="page-hero__head">
-          <p class="tag tag--dark" data-anim="blur-in" data-delay="100">Search</p>
           <h1 class="display" data-anim="blur-in" data-delay="100">Find an idea</h1>
         </div>
         <form class="search-page__form" action="${ctx.u("/search/")}" method="get" role="search" data-search-page data-anim="blur-in" data-delay="200">

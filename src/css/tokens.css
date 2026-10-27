@@ -101,7 +101,7 @@
   --container-narrow: 1064px;
   --read: 720px;
   --gutter: clamp(20px, 4.4vw, 80px);
-  --section: clamp(96px, 10vw, 144px);
+  --section: clamp(64px, 7vw, 104px);
   --radius-sm: 8px;
   --radius: 16px;
   --radius-lg: 24px;

@@ -23,13 +23,22 @@ const ICONS = {
   mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/>',
   pen: '<path d="M4 20l1.2-4.4L15.6 5.2a2 2 0 0 1 2.8 0l.4.4a2 2 0 0 1 0 2.8L8.4 18.8z"/><path d="M13.5 7.3l3.2 3.2"/>',
   star: '<path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8z" fill="currentColor"/>',
+  chevron: '<path d="m9 5 7 7-7 7"/>',
+  compass: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8z"/>',
+  path: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h5.5a3.5 3.5 0 0 0 0-7h-3a3.5 3.5 0 0 1 0-7H16"/>',
+  sprout: '<path d="M12 20v-8"/><path d="M12 12c0-3.6-2.6-6-6.5-6 0 3.6 2.6 6 6.5 6Z"/><path d="M12 14.5c0-3.3 2.4-5.5 6-5.5 0 3.3-2.4 5.5-6 5.5Z"/>',
+  briefcase: '<rect x="3.5" y="7" width="17" height="12.5" rx="2"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3.5 12.5h17"/>',
+  globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.2-3.4-8.5s1.1-6.1 3.4-8.5Z"/>',
+  cap: '<path d="m2.5 9.5 9.5-4.5 9.5 4.5-9.5 4.5z"/><path d="M6.5 11.5v4.2c1.4 1.4 3.3 2.1 5.5 2.1s4.1-.7 5.5-2.1v-4.2M21.5 9.5v5"/>',
 };
 
 export const icon = (name, cls = "") =>
   `<svg class="${cx("icon", cls)}" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]}</svg>`;
 
+/** LinkedIn's own logo in its brand colours: the white "in" on the blue
+    rounded square (#0A66C2), as LinkedIn's brand guidelines show it. */
 export const linkedinIcon = () =>
-  '<svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5a2.48 2.48 0 1 1 0 4.96 2.48 2.48 0 0 1 0-4.96ZM3 9.75h4v11H3zM9.5 9.75h3.83v1.5h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.13v5.43h-4v-4.82c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.9h-4z"/></svg>';
+  '<svg class="icon icon--linkedin" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" transform="translate(3.6 3.4) scale(0.7)" d="M4.98 3.5a2.48 2.48 0 1 1 0 4.96 2.48 2.48 0 0 1 0-4.96ZM3 9.75h4v11H3zM9.5 9.75h3.83v1.5h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.13v5.43h-4v-4.82c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.9h-4z"/></svg>';
 
 /* ------------------------------------------------------------- buttons */
 
@@ -138,9 +147,42 @@ export function topicCover(ctx, category, { cls, loading = "lazy" } = {}) {
   return `<img class="${cx("cover", cls)}" src="${ctx.u(topicCoverPath(category.slug))}" width="1200" height="800" alt="" loading="${loading}" decoding="async">`;
 }
 
+/* Number cards on art that says what each counts: growth rings for years,
+   the dotted world (his markets lit) for countries, a route of seven stops
+   for the markets he worked in, a stack of pages for essays. */
+
+export const NUMBER_ART = {
+  route: `<svg class="num-card__art num-card__art--route" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><path d="M20 168 C 60 150, 50 110, 92 104 S 150 70, 128 40 S 170 20, 186 30"/>${[[20, 168], [52, 140], [92, 104], [132, 84], [128, 40], [160, 26], [186, 30]]
+    .map(([x, y]) => `<circle cx="${x}" cy="${y}" r="6"/>`)
+    .join("")}</svg>`,
+  // one bar per year, rising, the latest year lit in sun
+  years: `<svg class="num-card__art num-card__art--years" viewBox="0 0 220 120" aria-hidden="true" focusable="false">${Array.from({ length: 22 }, (_, i) => {
+    const h = 14 + i * 4.6;
+    return `<rect x="${4 + i * 9.6}" y="${116 - h}" width="5.4" height="${h}" rx="2.7"${i === 21 ? ' class="is-now"' : ""} style="--i:${i}"/>`;
+  }).join("")}</svg>`,
+  world: (ctx) => `<img class="num-card__art num-card__art--map" src="${ctx.u("/assets/images/world-dots.svg")}" alt="" width="1440" height="500" loading="lazy" decoding="async">`,
+  pages: `<svg class="num-card__art" viewBox="0 0 200 200" aria-hidden="true" focusable="false">${[0, 1, 2, 3]
+    .map((i) => `<g transform="translate(${118 - i * 14} ${46 + i * 16}) rotate(${8 - i * 5})"><rect width="74" height="96" rx="5"/><path d="M12 20h50M12 32h50M12 44h38M12 56h50M12 68h30"/></g>`)
+    .join("")}</svg>`,
+};
+
+export function numCards(ctx, items) {
+  const value = (v) => (v === "{essays}" ? String(ctx.data.articles.length) : v);
+  return `<ul class="numbers__grid">${items
+    .map((s, i) => {
+      const art = typeof NUMBER_ART[s.art] === "function" ? NUMBER_ART[s.art](ctx) : NUMBER_ART[s.art] || "";
+      return `<li class="num-card num-card--${s.tone}" data-anim="slide-up" data-delay="${200 + i * 100}">
+        ${art}
+        <p class="num-card__value">${odometer(value(s.value))}</p>
+        <p class="num-card__label">${esc(s.label)}</p>
+      </li>`;
+    })
+    .join("")}</ul>`;
+}
+
 /* ------------------------------------------------------------ metadata */
 
-export const draft = (flag, note = "Draft copy — awaiting client approval") =>
+export const draft = (flag, note = "Draft copy, awaiting client approval") =>
   flag ? ` data-draft="${esc(note)}"` : "";
 
 export function kicker(ctx, item, { link = true } = {}) {
@@ -231,7 +273,7 @@ export function themeCards(ctx, { headingTag = "h3" } = {}) {
 export const authorsLine = (list = []) =>
   list.length <= 2 ? list.join(" & ") : `${list.slice(0, -1).join(", ")} & ${list.at(-1)}`;
 
-/** Typographic stand-in for a book cover — never a copy of the real one. */
+/** Typographic stand-in for a book cover, never a copy of the real one. */
 export function bookCover(item, size = "md") {
   const b = item.book;
   return `<div class="book-cover book-cover--${size} book-cover--${b.coverTone || "plum"}" role="img" aria-label="Typographic cover: ${esc(b.title)} by ${esc(authorsLine(b.authors))}">
@@ -340,28 +382,19 @@ export function breadcrumbs(ctx, trail, { light = false } = {}) {
  */
 export function conversationBlock(ctx, { item = null, compact = false } = {}) {
   const h = ctx.data.site.home.conversation;
-  const reasons = ctx.data.pages.contact?.reasons || [];
   const href = item ? `/contact/?about=${encodeURIComponent(item.slug)}` : h.cta.href;
   const id = `conv-${item ? item.slug : "panel"}`;
+  // after an article: the brief's end-of-article message, word for word
   const text = item
     ? "I write to clarify my thinking, not to have the final word. If you disagree, know of relevant research, or have seen something different in practice, I would like to hear your perspective."
     : h.text;
-  return `<section class="${cx("glow-panel", compact && "glow-panel--compact")}" aria-labelledby="${id}" data-anim="slide-up"${draft(!item && h.draft)}>
+  return `<section class="${cx("glow-panel", "glow-panel--compact", !compact && "glow-panel--wide")}" aria-labelledby="${id}" data-anim="slide-up"${draft(!item && h.draft)}>
     <div class="glow-panel__grid">
       <div class="glow-panel__head">
         <h2 class="glow-panel__title" id="${id}">Continue the conversation</h2>
-        ${item ? "" : `<p class="glow-panel__lead">${inline(h.headline)}</p>`}
         <p class="glow-panel__text">${esc(text)}</p>
       </div>
-      ${
-        compact
-          ? ""
-          : `<div class="glow-panel__list">
-        <p class="glow-panel__list-title">Ways to continue</p>
-        <ul>${reasons.map((r) => `<li>${esc(r.title)}</li>`).join("")}</ul>
-      </div>`
-      }
-      <div class="glow-panel__action">${btn({ href: ctx.u(href), label: item ? "Share your perspective" : "Let’s have a conversation", variant: "white" })}</div>
+      <div class="glow-panel__action">${btn({ href: ctx.u(href), label: item ? "Share your perspective" : h.cta.label, variant: "white" })}</div>
     </div>
   </section>`;
 }
@@ -445,10 +478,10 @@ export function loadMore(total, pageSize, noun) {
 
 /* ----------------------------------------------------------------- misc */
 
-/** Tag + main heading (+ intro, + action on the right for the split form). */
+/** Main heading (+ intro, + action on the right for the split form). No
+    eyebrow label above it: the heading says what the section is. */
 export function sectionHead({ tagText, title, intro, id, action, split = false, draftFlag, tagCls, titleCls = "h2" }) {
   return `<header class="${cx("section-head", split && "section-head--split")}"${draft(draftFlag)}>
-    ${tagText ? `<p class="${cx("tag", tagCls)}" data-anim="slide-up">${esc(tagText)}</p>` : ""}
     <h2 class="${titleCls}" id="${id}" data-anim="slide-up">${inline(title)}</h2>
     ${intro ? `<p class="section-head__intro" data-anim="slide-up" data-delay="400">${esc(intro)}</p>` : ""}
     ${action ? `<div class="section-head__action" data-anim="slide-up" data-delay="400">${action}</div>` : ""}

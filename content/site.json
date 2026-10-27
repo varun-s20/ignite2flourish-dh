@@ -1,7 +1,7 @@
 {
   "name": "Ignite2Flourish",
   "tagline": "Ideas for a more thoughtful working life",
-  "description": "Ideas on leadership, careers and professional growth from Sanzid Ahmed, a senior HR and people leader — connecting research, experience and new perspectives.",
+  "description": "Ideas on leadership, careers and professional growth from Sanzid Ahmed, a senior HR and people leader, connecting research, experience and new perspectives.",
   "url": "https://ignite2flourish.com",
   "basePath": "",
   "locale": "en-AU",
@@ -60,7 +60,7 @@
     "hero": {
       "eyebrow": "Ideas for a more thoughtful working life",
       "headline": "A more thoughtful way to *flourish* at work.",
-      "lede": "Ideas on leadership, careers and professional growth — connecting research, experience and new perspectives.",
+      "lede": "Ideas on leadership, careers and growth, from 22 years in HR.",
       "primary": {
         "label": "Explore the latest ideas",
         "href": "/ideas/"
@@ -70,61 +70,40 @@
         "href": "/books-research/"
       },
       "portrait": "hero",
-      "caption": "Sanzid Ahmed — Senior HR & People Leader",
-      "draft": true
+      "caption": "Sanzid Ahmed, Senior HR & People Leader",
+      "draft": true,
+      "facts": [
+        {
+          "icon": "briefcase",
+          "title": "HR director",
+          "text": "Local, regional and global roles"
+        },
+        {
+          "icon": "globe",
+          "title": "7 markets",
+          "text": "Australia, UK, Hong Kong and more"
+        },
+        {
+          "icon": "cap",
+          "title": "Oxford Saïd",
+          "text": "Executive Leadership Programme"
+        }
+      ]
     },
     "featured": "rethinking-recruitment-moving-beyond-experience-bias",
     "latestCount": 3,
-    "why": {
-      "eyebrow": "Why Ignite2Flourish",
-      "statement": "Most of us know what good practice looks like. The harder part is applying it — in a real organisation, with real people, on an ordinary Tuesday. Ignite2Flourish connects workplace best practice and research with *22 years of lived experience* in HR.",
-      "pillars": [
-        {
-          "title": "Experience",
-          "text": "Lessons from local, regional and global HR leadership roles across Australia, the UK, Hong Kong, New Zealand, Indonesia, Bangladesh and Pakistan."
-        },
-        {
-          "title": "Evidence",
-          "text": "Books and research papers read closely, summarised fairly, and kept separate from opinion."
-        },
-        {
-          "title": "Application",
-          "text": "Practical ideas for professionals who want to progress — and for those who feel a little stuck, or are simply going with the flow."
-        }
-      ],
-      "draft": true,
-      "stats": [
-        {
-          "value": "22",
-          "label": "Years in local, regional and global HR roles",
-          "tone": "ember"
-        },
-        {
-          "value": "100+",
-          "label": "Countries represented among colleagues across a career",
-          "tone": "navy"
-        },
-        {
-          "value": "{essays}",
-          "label": "Essays published on Ignite2Flourish",
-          "tone": "sun"
-        }
-      ],
-      "_statsNote": "Facts from the current About page. \"{essays}\" is replaced by the live count of published articles."
-    },
     "exploring": {
-      "intro": "Two questions I keep returning to at the moment. Updated as my thinking moves on.",
       "items": [
         {
-          "title": "Hiring for potential, not just experience",
-          "note": "Why do so many organisations still hire for an exact role match — and what would it take to select for learning, collaboration and the ability to lead change instead?",
+          "title": "Hiring for potential over experience",
+          "note": "Why do organisations still hire for an exact match instead of the ability to learn?",
           "links": [
             "rethinking-recruitment-moving-beyond-experience-bias"
           ]
         },
         {
           "title": "From languishing to flourishing at work",
-          "note": "The space between ‘not unwell’ and ‘thriving’ is where many capable professionals live. What moves people out of it — and what keeps them there?",
+          "note": "Many capable people sit between ‘not unwell’ and ‘thriving’. What moves them?",
           "links": [
             "how-to-transform-your-life-from-languishing-to-flourishing",
             "the-mental-health-continuum"
@@ -132,19 +111,102 @@
         }
       ],
       "draft": true,
-      "invite": "A question from your own working life, a study worth reading, a book that changed your mind — suggestions shape what I explore next."
+      "invite": "A question from your working life, a study or a book. Suggestions shape what comes next.",
+      "headline": "What I’m exploring now",
+      "inviteTitle": "What should I explore next?"
     },
     "startHere": {
-      "intro": "New here? Three pieces that show what Ignite2Flourish is about — one from each theme.",
       "items": [
         "how-to-transform-your-life-from-languishing-to-flourishing",
         "is-too-much-information-tmi-holding-you-back-take-these-6-steps-to-move-forward",
         "creating-a-growth-mindset"
-      ]
+      ],
+      "headline": "New here? Start with these three."
     },
     "conversation": {
       "headline": "Agree? Disagree? Have an experience that complicates the argument?",
-      "text": "Ideas get better in conversation. Write to Sanzid directly — to respond to an article, explore a collaboration, or ask about a podcast, panel or speaking opportunity.",
+      "text": "Agree, disagree or know a study I missed? Write to me directly.",
+      "cta": {
+        "label": "Write to Sanzid",
+        "href": "/contact/"
+      },
+      "draft": true
+    },
+    "numbers": {
+      "headline": "Good practice, tested in *real organisations*.",
+      "items": [
+        {
+          "value": "22",
+          "label": "Years in HR leadership",
+          "tone": "ember",
+          "art": "years"
+        },
+        {
+          "value": "100+",
+          "label": "Countries among colleagues",
+          "tone": "navy",
+          "art": "world"
+        },
+        {
+          "value": "{essays}",
+          "label": "Essays published",
+          "tone": "plum",
+          "art": "pages"
+        }
+      ],
+      "draft": true,
+      "_note": "Facts from the current About page. \"{essays}\" is replaced by the live count of published articles."
+    },
+    "about": {
+      "text": "Twenty-two years in HR across seven markets, including director roles that reported to group boards."
+    },
+    "topics": {
+      "headline": "What I write *about*",
+      "line": "How do capable people do their best work, and flourish while doing it?",
+      "draft": true
+    },
+    "learning": {
+      "headline": "Learning behind the *practice*",
+      "line": "Programmes and memberships behind the work.",
+      "draft": true,
+      "_note": "From Sanzid's public LinkedIn certifications (checked 27 Oct 2026). Names are set in type, not their logos. Client to confirm, and to add employers if he wants them shown.",
+      "items": [
+        {
+          "name": "Saïd Business School",
+          "sub": "University of Oxford",
+          "what": "Executive Leadership Programme",
+          "style": "serif"
+        },
+        {
+          "name": "Macquarie University",
+          "what": "Neuroscience of Leadership",
+          "style": "sans"
+        },
+        {
+          "name": "Australian HR Institute",
+          "what": "Professional member, MAHRI",
+          "style": "caps"
+        },
+        {
+          "name": "International Coaching Federation",
+          "what": "Member",
+          "style": "serif"
+        },
+        {
+          "name": "Coursera",
+          "what": "The Science of Well-Being",
+          "style": "round"
+        },
+        {
+          "name": "Authentic Education",
+          "what": "Accelerated Coaching Certification",
+          "style": "caps"
+        }
+      ]
+    },
+    "closing": {
+      "headline": "Ideas get better in *conversation*.",
+      "line": "Agree, disagree or know a study I missed? I would like to hear it.",
       "cta": {
         "label": "Continue the conversation",
         "href": "/contact/"

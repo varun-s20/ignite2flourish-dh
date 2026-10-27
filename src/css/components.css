@@ -1175,32 +1175,12 @@ a.kicker:hover {
   line-height: 1.02;
   letter-spacing: -0.03em;
 }
-.glow-panel__lead {
-  margin-top: 22px;
-  max-width: 26ch;
-  font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-}
 .glow-panel__text {
   margin-top: 18px;
   max-width: 52ch;
   color: rgba(255, 255, 255, 0.92);
   font-size: 1.0625rem;
   line-height: 1.65;
-}
-.glow-panel__list-title {
-  margin-bottom: 14px;
-  font-size: 1.375rem;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-}
-.glow-panel__list li {
-  padding-block: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 1.0625rem;
-  font-weight: 500;
 }
 .glow-panel__action {
   align-self: start;
@@ -1214,6 +1194,14 @@ a.kicker:hover {
   .glow-panel--compact .glow-panel__grid {
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: end;
+  }
+}
+.glow-panel--wide .glow-panel__title {
+  max-width: none;
+}
+@media (min-width: 992px) {
+  .glow-panel--wide .glow-panel__grid {
+    align-items: center;
   }
 }
 

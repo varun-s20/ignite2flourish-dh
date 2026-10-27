@@ -5,7 +5,7 @@
 //
 // Ideas and its themes: dark header with the three themes as an orbit map
 // (the home mark, after gravity-design.de), filter pills, card grid.
-// Books & Research: dark header with the covers fanned in an arch, then a
+// Books & Research: dark header with the books in 3D on a shelf, then a
 // sticky filter column beside stacked wide cards. Both headers end in a
 // convex edge. Topic pages keep the plain dark header.
 
@@ -15,9 +15,8 @@ import { archiveSearch, bookCover, breadcrumbs, emptyState, icon, loadMore, pape
 function head(ctx, o) {
   return `<div class="page-hero__head">
     ${o.trail ? `<div data-anim="blur-in" data-delay="100">${breadcrumbs(ctx, o.trail)}</div>` : ""}
-    <p class="tag tag--dark" data-anim="blur-in" data-delay="100">${esc(o.eyebrow)}</p>
     <h1 class="display" data-anim="blur-in" data-delay="100">${esc(o.title)}</h1>
-    <p class="page-hero__intro" data-anim="blur-in" data-delay="200"${o.draftIntro ? ` data-draft="Draft copy — awaiting client approval"` : ""}>${esc(o.intro)}</p>
+    <p class="page-hero__intro" data-anim="blur-in" data-delay="200"${o.draftIntro ? ` data-draft="Draft copy, awaiting client approval"` : ""}>${esc(o.intro)}</p>
     ${o.latest ? latestLink(ctx, o.latest) : ""}
   </div>`;
 }
@@ -44,7 +43,7 @@ function themeOrbit(ctx, currentSlug) {
   const here = (on) => (on ? ' aria-current="page"' : "");
   return `<nav class="orbit" aria-label="Ideas by theme" data-anim="blur-in" data-delay="200">
     <svg class="orbit__rings" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="49.5"/></svg>
-    <a class="orbit__core" href="${ctx.u("/ideas/")}"${here(!currentSlug)}><span class="orbit__core-num">${articles.length}</span><span class="orbit__core-label">essays</span><span class="visually-hidden"> — all ideas</span></a>
+    <a class="orbit__core" href="${ctx.u("/ideas/")}"${here(!currentSlug)}><span class="orbit__core-num">${articles.length}</span><span class="orbit__core-label">essays</span><span class="visually-hidden">: all ideas</span></a>
     <ul class="orbit__list">${categories
       .map((c, i) => {
         const o = ORBIT[i % ORBIT.length];
@@ -56,22 +55,37 @@ function themeOrbit(ctx, currentSlug) {
   </nav>`;
 }
 
-/* Books & Research header art: the contact page's arch with the flame disc
-   rising in it like a sun, books leaning on its left leg and papers on its
-   right. */
+/* Books & Research header art: the books and papers as 3D objects (cover,
+   spine, page edges) standing on a shelf in front of the contact page's
+   arch, with the flame disc rising in it. The scene turns a little with
+   the pointer (motion.js); a book slides forward and faces you on hover. */
 function shelf(ctx, items) {
-  const fan = items.slice(0, 4);
-  return `<div class="shelf" data-anim="blur-in" data-delay="200">
+  const row = items.slice(0, 4);
+  return `<div class="shelf3d" data-anim="blur-in" data-delay="200" data-shelf3d>
     <span class="shelf__arch" aria-hidden="true"><span class="shelf__sun"></span></span>
-    <ul class="shelf__fan" aria-label="Latest reviews">${fan
-      .map((it, i) => {
-        const isBook = it.type === "book-review";
-        return `<li class="shelf__slot${isBook ? "" : " shelf__slot--paper"}" style="--i:${i}"><a class="shelf__item" href="${ctx.u(it.url)}"><span class="visually-hidden">${isBook ? "Book review" : "Research review"}: ${esc(it.title)}</span><span aria-hidden="true">${isBook ? bookCover(it, "md") : paperCard(it, "md")}</span></a></li>`;
-      })
-      .join("")}</ul>
+    <div class="shelf3d__scene">
+      <ul class="shelf3d__row" aria-label="Latest reviews">${row
+        .map((it, i) => {
+          const isBook = it.type === "book-review";
+          const tone = isBook ? it.book.coverTone || "plum" : "paper";
+          const spineTitle = isBook ? it.book.title : it.paper.journal;
+          return `<li class="b3d b3d--${tone}${isBook ? "" : " b3d--paper"}" style="--i:${i}">
+          <a class="b3d__link" href="${ctx.u(it.url)}"><span class="visually-hidden">${isBook ? "Book review" : "Research review"}: ${esc(it.title)}</span>
+            <span class="b3d__obj" aria-hidden="true">
+              <span class="b3d__face b3d__front">${isBook ? bookCover(it, "md") : paperCard(it, "md")}</span>
+              <span class="b3d__face b3d__spine"><span>${esc(spineTitle)}</span></span>
+              <span class="b3d__face b3d__pages"></span>
+              <span class="b3d__face b3d__top"></span>
+              <span class="b3d__face b3d__back"></span>
+            </span>
+          </a>
+        </li>`;
+        })
+        .join("")}</ul>
+      <span class="shelf3d__board" aria-hidden="true"></span>
+    </div>
   </div>`;
 }
-
 
 function listSection(ctx, o, list) {
   const pageSize = ctx.data.site.archive.pageSize;
@@ -146,7 +160,7 @@ export function ideasPages(ctx) {
     ...categories.map((c) => ({ label: c.name, href: c.url, value: c.slug, count: c.items.length })),
   ];
   const intro =
-    "Essays and practical notes on leadership, careers and flourishing at work — drawn from 22 years in HR and tested against research.";
+    "Essays and practical notes on leadership, careers and flourishing at work, drawn from 22 years in HR and tested against research.";
   const pages = [
     {
       path: "/ideas/",
@@ -174,7 +188,7 @@ export function ideasPages(ctx) {
   for (const c of categories) {
     pages.push({
       path: c.url,
-      title: `${c.name} — Ideas`,
+      title: `${c.name} | Ideas`,
       description: `${c.description} Articles on ${c.name.toLowerCase()} from Ignite2Flourish.`,
       bodyClass: `page-archive page-ideas page-category-${c.slug}`,
       jsonld: [collection(ctx, c.url, c.name, c.description, c.items)],
@@ -206,7 +220,7 @@ export function ideasPages(ctx) {
 export function tagPages(ctx) {
   return ctx.data.tags.map((t) => ({
     path: t.url,
-    title: `${t.name} — Topics`,
+    title: `${t.name} | Topics`,
     description: `Articles and reviews tagged “${t.name}” on Ignite2Flourish.`,
     bodyClass: "page-archive page-tag",
     noindex: t.items.length < 2,
@@ -218,7 +232,7 @@ export function tagPages(ctx) {
       ],
       eyebrow: "Topic",
       title: t.name,
-      intro: `${t.items.length} ${t.items.length === 1 ? "piece" : "pieces"} on ${t.name.toLowerCase()} across articles, books and research.`,
+      intro: `${t.items.length} ${t.items.length === 1 ? "piece" : "pieces"} tagged ${t.name.toLowerCase()}.`,
       items: t.items,
       noun: "pieces",
       listLabel: `Tagged ${t.name}`,
@@ -274,7 +288,7 @@ export function reviewPages(ctx) {
         : "Plain-English reviews of research papers, with findings kept separate from interpretation.";
     pages.push({
       path: t.url,
-      title: `${t.name} — Books & Research`,
+      title: `${t.name} | Books & Research`,
       description: desc,
       bodyClass: "page-archive page-reviews",
       content: reviewArchive(ctx, {

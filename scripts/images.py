@@ -130,6 +130,14 @@ def make_icons(icons):
     symbol = Image.fromarray(np.dstack([rgb, alpha])[:, : split + 1].clip(0, 255).astype(np.uint8), "RGBA")
     symbol = symbol.crop(symbol.getbbox())
 
+    # the symbol at page size too, for the home hero (its proportions kept)
+    for h in (360, 720):
+        w = round(symbol.width * h / symbol.height)
+        out = symbol.resize((w, h), Image.LANCZOS)
+        out.save(icons.parent / "logo" / f"ignite2flourish-symbol-{h}.webp", "WEBP", lossless=True, method=6)
+        out.save(icons.parent / "logo" / f"ignite2flourish-symbol-{h}.png", optimize=True)
+        print(f"symbol-{h}  {w}x{h}")
+
     def square(size, pad, bg=None):
         canvas = Image.new("RGBA", (size, size), bg or (0, 0, 0, 0))
         fit = symbol.copy()
@@ -152,7 +160,7 @@ def make_icons(icons):
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     for old in OUT.glob("*"):
-        if old.name != "og-default.jpg":
+        if old.name not in ("og-default.jpg", "world-dots.svg"):  # made by og.py and worldmap.py
             old.unlink()
     for name, (file, aspect, focal, zoom, widths) in PHOTOS.items():
         img = ImageOps.exif_transpose(Image.open(CLIENT / file)).convert("RGB")

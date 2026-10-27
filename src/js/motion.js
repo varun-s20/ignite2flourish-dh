@@ -1,4 +1,4 @@
-/* Motion: the home hero's orbiting mark, entrance reveals, the scroll-
+/* Motion: the home hero's scroll hand-off, entrance reveals, the scroll-
    coloured statement, the sticky "exploring now" swap, the pinned
    horizontal "start here" track, cursor-following card badges, accordions
    and the credentials line.
@@ -45,191 +45,72 @@
   };
 
   /* ------------------------------------------------ gravity hero (home) */
-  // The mark is a flame disc with a ring and a dot on tilted orbits around
-  // it: they pass behind the disc and in front of it, spiral in on load,
-  // lean towards the pointer and fly wide when the figure is clicked
-  // ("ignite"). From 900px the hero is pinned and --gp (0-1) follows the
-  // curtain rising over it; the stylesheet turns that into the figure
-  // sinking, the words fading and the curtain's cap flattening.
+  // From 900px the hero is pinned and --gp (0-1) follows the curtain rising
+  // over it; the stylesheet turns that into the figure sinking, the words
+  // fading and the brand mark lifting. --cap flattens the curtain's convex
+  // edge as it reaches the top.
 
   function initGravity(animate) {
     var hero = I2F.$("[data-gravity]");
-    if (!hero || !animate) return; // at rest, exactly as the stylesheet places it
-    var fig = I2F.$("[data-gravity-figure]", hero);
-    var mark = I2F.$("[data-gravity-mark]", hero);
-    var hint = I2F.$("[data-gravity-ignite]", hero);
+    if (!hero || !animate) return;
     var curtain = I2F.$("[data-curtain]");
     var cap = curtain && I2F.$(".curtain__cap", curtain);
-    var mass = I2F.$('[data-orb="mass"]', mark);
-    var sats = [
-      // r in hundredths of the figure's height; w in radians per second
-      { el: I2F.$('[data-orb="ring"]', mark), r: 15.4, a: 2.2, w: 0.34, tilt: 0.36, rot: -0.3 },
-      { el: I2F.$('[data-orb="dot"]', mark), r: 11.2, a: -2.5, w: -0.58, tilt: 0.5, rot: 0.66 },
-    ];
-    sats.forEach(function (s) {
-      s.cos = Math.cos(s.rot);
-      s.sin = Math.sin(s.rot);
-      s.front = null;
-    });
-
-    var u = 8;
-    var heroH = 1;
-    var capH = 0;
     var pinned = false;
-    var p = 0;
-    var visible = true;
-    var start = performance.now();
-    var spin = 0; // extra angular speed from a click, decays
-    var bump = 0; // orbit radius spring (0 at rest) and its velocity
-    var bumpV = 0;
-    var scale = 0; // mass scale spring; pops in from 0
-    var scaleV = 0;
-    var ox = 0; // mass offset towards the pointer, and its target
-    var oy = 0;
-    var tx = 0;
-    var ty = 0;
-
-    var onScroll = function () {
+    var h = 1;
+    var capH = 0;
+    var ticking = false;
+    var update = function () {
+      ticking = false;
       var y = window.scrollY;
-      var next = pinned ? clamp(y / heroH, 0, 1) : 0;
-      if (next !== p) {
-        p = next;
-        hero.style.setProperty("--gp", p.toFixed(4));
-      }
+      hero.style.setProperty("--gp", pinned ? clamp(y / h, 0, 1).toFixed(4) : "0");
       // the cap is flat by the time its edge reaches the top of the window
-      if (pinned && curtain) curtain.style.setProperty("--cap", (1 - clamp(y / (heroH + capH), 0, 1)).toFixed(4));
-      if (visible && p < 1) kick();
+      if (pinned && curtain) curtain.style.setProperty("--cap", (1 - clamp(y / (h + capH), 0, 1)).toFixed(4));
     };
     var measure = function () {
       pinned = getComputedStyle(hero).position === "sticky";
-      heroH = hero.offsetHeight || 1;
+      h = hero.offsetHeight || 1;
       capH = cap ? cap.offsetHeight : 0;
       if (curtain && !pinned) curtain.style.removeProperty("--cap");
-      u = (fig.offsetHeight || 800) / 100;
-      onScroll();
+      update();
     };
-    var markY = function () {
-      return oy - p * 34 * u;
-    };
-
-    tickers.push(function (dt) {
-      if (!visible || p >= 1) return false;
-      var t = (performance.now() - start) / 1000;
-      var settle = 1 - Math.pow(1 - clamp(t / 2.6, 0, 1), 3);
-      var spread = 1 + 2.3 * (1 - settle) + bump + p * 1.4;
-      var extra = 4.6 * (1 - settle) + spin;
-      spin *= Math.exp(-dt / 1.1);
-      // springs (semi-implicit Euler; stable at these rates)
-      bumpV += (-46 * bump - 7.2 * bumpV) * dt;
-      bump += bumpV * dt;
-      scaleV += (-110 * (scale - (t > 0.35 ? 1 : 0)) - 12 * scaleV) * dt;
-      scale += scaleV * dt;
-      ox = follow(ox, tx, dt, 0.9);
-      oy = follow(oy, ty, dt, 0.9);
-
-      var mx = ox;
-      var my = markY();
-      var show = clamp((t - 0.25) / 0.7, 0, 1);
-      mass.style.opacity = t > 0.35 ? "1" : "0";
-      mass.style.transform = "translate3d(" + mx.toFixed(2) + "px," + my.toFixed(2) + "px,0) scale(" + Math.max(0, scale).toFixed(4) + ")";
-      sats.forEach(function (s) {
-        s.a += (s.w + (s.w > 0 ? extra : -extra)) * dt;
-        var R = s.r * u * spread;
-        var x0 = Math.cos(s.a) * R;
-        var y0 = Math.sin(s.a) * R * s.tilt;
-        var z = Math.sin(s.a); // > 0: the near half of the orbit
-        var x = mx + x0 * s.cos - y0 * s.sin;
-        var y = my + x0 * s.sin + y0 * s.cos;
-        s.el.style.transform = "translate3d(" + x.toFixed(2) + "px," + y.toFixed(2) + "px,0) scale(" + (1 + 0.14 * z).toFixed(4) + ")";
-        var front = z >= 0;
-        if (front !== s.front) {
-          s.front = front;
-          s.el.style.zIndex = front ? "4" : "2";
-        }
-        s.el.style.opacity = (show * (front ? 1 : 0.82)).toFixed(3);
-      });
-      return true;
-    });
-
-    /* click the figure (or the hint button) to ignite */
-    var lit;
-    var burst = function (cls, x, y, vars) {
-      var el = document.createElement("span");
-      el.className = cls;
-      el.style.setProperty("--x", x.toFixed(1) + "px");
-      el.style.setProperty("--y", y.toFixed(1) + "px");
-      for (var k in vars) el.style.setProperty(k, vars[k]);
-      el.addEventListener("animationend", function () {
-        el.remove();
-      });
-      mark.appendChild(el);
-    };
-    var ignite = function () {
-      spin = 7.5;
-      bumpV += 2.4;
-      scaleV += 5;
-      var x = ox;
-      var y = markY();
-      burst("gravity__wave", x, y);
-      burst("gravity__wave is-late", x, y);
-      for (var i = 0; i < 18; i++) {
-        var ang = (i / 18) * Math.PI * 2 + Math.random() * 0.35;
-        var dist = (14 + Math.random() * 20) * u;
-        burst("gravity__spark" + (i % 3 === 1 ? " is-ember" : i % 5 === 0 ? " is-cream" : ""), x, y, {
-          "--dx": (Math.cos(ang) * dist).toFixed(1) + "px",
-          "--dy": (Math.sin(ang) * dist).toFixed(1) + "px",
-          "--s": (0.6 + Math.random() * 0.9).toFixed(2),
-        });
-      }
-      hero.classList.add("is-lit");
-      clearTimeout(lit);
-      lit = setTimeout(function () {
-        hero.classList.remove("is-lit");
-      }, 650);
-      if (hint) hint.classList.add("is-used");
-      kick();
-    };
-    fig.setAttribute("data-ignitable", "");
-    hero.addEventListener("click", function (e) {
-      var t = e.target;
-      var viaHint = t.closest("[data-gravity-ignite]");
-      if (!viaHint && (!t.closest("[data-gravity-figure]") || String(window.getSelection()))) return;
-      ignite();
-    });
-    if (hint) {
-      if (window.matchMedia("(pointer: coarse)").matches) hint.lastChild.textContent = "Tap to ignite";
-      hint.hidden = false;
-      setTimeout(function () {
-        hint.classList.add("is-shown");
-      }, 2800);
-    }
-
-    /* the mass leans a little towards the pointer */
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      hero.addEventListener(
-        "pointermove",
-        function (e) {
-          var r = mark.getBoundingClientRect();
-          var lim = 3.2 * u;
-          tx = clamp((e.clientX - r.left) * 0.05, -lim, lim);
-          ty = clamp((e.clientY - r.top) * 0.05, -lim, lim);
-          kick();
-        },
-        { passive: true }
-      );
-      hero.addEventListener("pointerleave", function () {
-        tx = ty = 0;
-      });
-    }
-
-    new IntersectionObserver(function (entries) {
-      visible = entries[0].isIntersecting;
-      if (visible) kick();
-    }).observe(hero);
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      },
+      { passive: true }
+    );
     window.addEventListener("resize", I2F.debounce(measure, 120));
     measure();
-    kick();
+  }
+
+  /* --------------------------------------- books & research 3D shelf */
+  // The shelf turns a little towards the pointer anywhere in the header.
+
+  function initShelf3d(animate) {
+    var shelf = I2F.$("[data-shelf3d]");
+    if (!shelf || !animate || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    var area = shelf.closest("section") || shelf;
+    var frame = 0;
+    area.addEventListener(
+      "pointermove",
+      function (e) {
+        if (frame) return;
+        frame = requestAnimationFrame(function () {
+          frame = 0;
+          var r = shelf.getBoundingClientRect();
+          shelf.style.setProperty("--tx", clamp((e.clientX - (r.left + r.width / 2)) / (r.width * 0.9), -1, 1).toFixed(3));
+          shelf.style.setProperty("--ty", clamp((e.clientY - (r.top + r.height / 2)) / (r.height * 1.2), -1, 1).toFixed(3));
+        });
+      },
+      { passive: true }
+    );
+    area.addEventListener("pointerleave", function () {
+      shelf.style.setProperty("--tx", "0");
+      shelf.style.setProperty("--ty", "0");
+    });
   }
 
   /* ------------------------------------------- contact stage (arch) */
@@ -655,6 +536,7 @@
     if (!enabled) root.classList.remove("motion");
     initGravity(enabled);
     initContactStage(enabled);
+    initShelf3d(enabled);
     initEntrances(enabled);
     initFaq(enabled);
     if (!enabled) return;

@@ -8,13 +8,13 @@
     },
     "career-life": {
       "name": "Career & Life",
-      "description": "Goals, momentum and growth for professionals who want to progress — or feel a little stuck.",
+      "description": "Goals, momentum and growth for professionals who want to progress, or feel a little stuck.",
       "motif": "path",
       "order": 2
     },
     "flourishing": {
       "name": "Flourishing",
-      "description": "Wellbeing, self-awareness and positive psychology — what it takes to thrive rather than simply get by.",
+      "description": "Wellbeing, self-awareness and positive psychology, and what helps people thrive.",
       "motif": "bloom",
       "order": 3
     }

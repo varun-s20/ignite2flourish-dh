@@ -1,42 +1,36 @@
 // Home page (WordPress: front-page.php).
 //
-// Hero: the client, full height, with an orbiting three-circle mark, after
-// gravity-design.de; it stays pinned while the page rises over it.
-// Below it, the agreed SwiftForm-style design (themes marquee,
-// scroll-coloured statement with odometer stats, sticky "exploring" swap,
-// pinned "start here" track, dark featured band, cursor-follow cards).
-// Decluttered with cherylcran.com's restraint: one idea and one action per
-// section, more space, a photo-beside-panel About block, three theme circles
-// and a single glow panel to close.
+// v5 (27 Oct 2026), after phenom.com's restraint: each section says one
+// thing, in a line or two, and lets a number, an icon or an image carry the
+// rest. No eyebrow tags or filler subtext above headings.
+//   hero        the client full height (gravity-design.de), headline, one
+//               line, one button; what he has done on the right
+//   numbers     one line, three numbers on related art
+//   about       name and role in the spotlight
+//   topics      icon list (phenom's industries list)
+//   learning    institutions in dark tiles (phenom's "The Doers")
+//   exploring   two questions and an invitation; the words swap as the
+//               pictures scroll past
+//   start here  three numbered pieces
+//   featured, latest, books
+//   closing     one line and one button (phenom's "Take the first step")
 
 import { esc, inline } from "../../scripts/lib/util.mjs";
-import {
-  authorsLine,
-  btn,
-  conversationBlock,
-  cover,
-  coverStage,
-  draft,
-  featureCard,
-  icon,
-  linkedinIcon,
-  marquee,
-  odometer,
-  pathCard,
-  picture,
-  postCard,
-  sectionHead,
-  themeCards,
-} from "../components.mjs";
+import { authorsLine, btn, cover, coverStage, draft, featureCard, icon, linkedinIcon, marquee, numCards, odometer, picture, postCard } from "../components.mjs";
+
+/* A heading with an optional link on the right; nothing above or below. */
+const head = (title, id, link) =>
+  `<div class="home-head${link ? " home-head--split" : ""}">
+    <h2 class="home-head__title" id="${id}" data-anim="slide-up">${title}</h2>
+    ${link ? `<a class="link-arrow home-head__link" href="${link.href}" data-anim="slide-up">${esc(link.label)}${icon("arrow")}</a>` : ""}
+  </div>`;
 
 /* ------------------------------------------------------ hero (gravity) */
 // After gravity-design.de: the first screen is the person, full height on a
-// dark ground, with a small physical "mark" beside him. Here the mark is the
-// logo's three round flame heads (one flame disc, a ring and a dot) orbiting
-// in his line of sight, passing behind and in front of him. motion.js runs
-// the orbits, the click-to-ignite burst and the scroll hand-off; without it
-// the mark rests in place. The portrait is the client's photo with only the
-// studio backdrop removed (scripts/cutouts.py).
+// dark ground. To his right, the logo's own symbol (the three flame
+// figures, from the client's vector PDF) rises in and glows. motion.js
+// runs the scroll hand-off. The portrait is the client's photo with only
+// the studio backdrop removed (scripts/cutouts.py).
 
 const FIGURE = { widths: [640, 960, 1397], w: 1397, h: 1965 };
 
@@ -54,39 +48,32 @@ function figure(ctx) {
 
 function hero(ctx) {
   const h = ctx.data.home.hero;
-  const { categories, site } = ctx.data;
-  const author = ctx.data.authors[site.defaultAuthor];
+  const author = ctx.data.authors[ctx.data.site.defaultAuthor];
   return `<section class="gravity dark" aria-labelledby="hero-title" data-gravity>
     <div class="gravity__figure" data-gravity-figure>
       <span class="gravity__glow" aria-hidden="true"></span>
       <svg class="gravity__halo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="48"/></svg>
       ${figure(ctx)}
-      <div class="gravity__mark" aria-hidden="true" data-gravity-mark>
-        <span class="gravity__orb gravity__orb--mass" data-orb="mass"></span>
-        <span class="gravity__orb gravity__orb--ring" data-orb="ring"></span>
-        <span class="gravity__orb gravity__orb--dot" data-orb="dot"></span>
-      </div>
-      <button class="gravity__hint mono" type="button" data-gravity-ignite hidden><span class="gravity__hint-dot" aria-hidden="true"></span>Click to ignite</button>
+    </div>
+    <div class="gravity__brand" aria-hidden="true">
+      <span class="gravity__brand-glow"></span>
+      <picture><source type="image/webp" srcset="${ctx.u("/assets/logo/ignite2flourish-symbol-360.webp")} 198w, ${ctx.u("/assets/logo/ignite2flourish-symbol-720.webp")} 395w" sizes="(min-width: 900px) 12vw, 60px"><img class="gravity__brand-img" src="${ctx.u("/assets/logo/ignite2flourish-symbol-720.png")}" width="395" height="720" alt=""></picture>
     </div>
     <div class="container gravity__inner">
-      <div class="gravity__intro"${draft(h.draft, "Draft hero copy — awaiting client approval")}>
+      <div class="gravity__intro"${draft(h.draft)}>
         <h1 class="display hero__title gravity__title" id="hero-title" data-anim="blur-in" data-delay="900">${inline(h.headline)}</h1>
         <p class="gravity__lede" data-anim="blur-in" data-delay="1000">${esc(h.lede)}</p>
         <div class="gravity__action" data-anim="blur-in" data-delay="1100">${btn({ href: ctx.u(h.primary.href), label: h.primary.label })}</div>
       </div>
-      <nav class="gravity__claim" aria-label="Read by theme" data-anim="blur-in" data-delay="1250">
-        <p class="mono">Read by theme</p>
-        <ul>${categories
-          .map(
-            (c) => `<li><a class="gravity__theme" href="${ctx.u(c.url)}"><span class="gravity__theme-name">${esc(c.name)}</span><span class="gravity__theme-count">${c.items.length} essays</span></a></li>`,
-          )
-          .join("")}</ul>
-      </nav>
+      <ul class="gravity__facts" aria-label="Experience"${draft(true)}>${h.facts
+        .map(
+          (f, i) => `<li class="gravity__fact" data-anim="blur-in" data-delay="${1200 + i * 90}">${icon(f.icon)}<span><strong>${esc(f.title)}</strong><span>${esc(f.text)}</span></span></li>`,
+        )
+        .join("")}</ul>
     </div>
     <div class="gravity__foot">
       <div class="container gravity__foot-inner">
         <p class="gravity__name" data-anim="blur-in" data-delay="1350"><strong>${esc(author.name)}</strong><span>${esc(author.descriptor)}</span></p>
-        <span class="gravity__scroll" aria-hidden="true"><i></i></span>
         <a class="gravity__social" href="${esc(author.linkedin)}" target="_blank" rel="noopener" data-anim="blur-in" data-delay="1350">${linkedinIcon()}<span>LinkedIn</span><span class="visually-hidden"> (opens in a new tab)</span></a>
       </div>
     </div>
@@ -104,26 +91,85 @@ function ticker(ctx) {
     .slice(0, 12)
     .map((t) => ({ label: t.name }));
   return `<div class="curtain__ticker">
-    <div class="container curtain__ticker-inner"><p class="mono">Ideas I keep returning to</p>${marquee(themes, { label: "Recurring themes" })}</div>
+    <div class="container curtain__ticker-inner">${marquee(themes, { label: "Recurring themes" })}</div>
   </div>`;
 }
 
-/* ---------------------------------------------------------------- why */
+/* ------------------------------------------------------------- numbers */
 
-function why(ctx) {
-  const w = ctx.data.home.why;
-  const stats = (w.stats || []).map((s) => ({ ...s, value: s.value === "{essays}" ? String(ctx.data.articles.length) : s.value }));
-  return `<section class="section why" aria-labelledby="why-title">
+function numbers(ctx) {
+  const n = ctx.data.home.numbers;
+  return `<section class="section numbers" aria-labelledby="numbers-title">
     <div class="container">
-      <div class="why__head"${draft(w.draft)}>
-        <h2 class="tag" id="why-title" data-anim="slide-up">${esc(w.eyebrow)}</h2>
-        <p class="why__statement" data-reveal-chars data-anim="slide-up">${inline(w.statement)}</p>
+      <h2 class="numbers__title" id="numbers-title" data-anim="slide-up"${draft(n.draft)}>${inline(n.headline)}</h2>
+      ${numCards(ctx, n.items)}
+    </div>
+  </section>`;
+}
+
+/* --------------------------------------------- about (photo | spotlight) */
+
+function about(ctx) {
+  const a = ctx.data.authors[ctx.data.site.defaultAuthor];
+  const h = ctx.data.home.about;
+  return `<section class="split split--home" aria-labelledby="about-title">
+    <div class="split__media">${picture(ctx, "home-about", { alt: "Sanzid Ahmed in a blue shirt, smiling", sizes: "(min-width: 900px) 50vw, 100vw" })}</div>
+    <div class="split__panel dark">
+      <div class="split__inner">
+        <p class="spot-role" data-anim="slide-up">${icon("star")}<span>${esc(a.descriptor)}</span></p>
+        <h2 class="split__title spot-name" id="about-title" data-anim="slide-up">${esc(a.name)}</h2>
+        <p data-anim="slide-up"${draft(true)}>${esc(h.text)}</p>
+        <div data-anim="slide-up">${btn({ href: ctx.u("/about/"), label: "More about Sanzid", variant: "white" })}</div>
       </div>
-      <ul class="stats">${stats
+    </div>
+  </section>`;
+}
+
+/* ------------------------------------------------- topics (icon list) */
+// phenom.com's industries list: a large heading on the left, rows on the
+// right with an icon, the name, two lines and a chevron.
+
+const TOPIC_ICONS = { "work-leadership": "compass", "career-life": "path", flourishing: "sprout" };
+
+function topics(ctx) {
+  const t = ctx.data.home.topics;
+  return `<section class="section topics-v5" aria-labelledby="topics-title">
+    <div class="container topics-v5__grid">
+      <div class="topics-v5__head">
+        <h2 class="topics-v5__title" id="topics-title" data-anim="slide-up">${inline(t.headline)}</h2>
+        <p class="topics-v5__line" data-anim="slide-up"${draft(t.draft)}>${esc(t.line)}</p>
+      </div>
+      <ul class="topic-rows">${ctx.data.categories
         .map(
-          (s, i) => `<li class="stat-card stat-card--${s.tone}" data-anim="slide-up" data-delay="${300 + i * 100}">
-          <p class="stat-card__value">${odometer(s.value)}</p>
-          <p class="stat-card__label">${esc(s.label)}</p>
+          (c, i) => `<li data-anim="slide-up" data-delay="${150 + i * 90}"><a class="topic-row topic-row--${esc(c.slug)}" href="${ctx.u(c.url)}">
+          <span class="topic-row__icon">${icon(TOPIC_ICONS[c.slug] || "flame")}</span>
+          <span class="topic-row__body"><span class="topic-row__name">${esc(c.name)}</span><span class="topic-row__text">${esc(c.description)}</span></span>
+          <span class="topic-row__meta"><span>${c.items.length} essays</span>${icon("chevron")}</span>
+        </a></li>`,
+        )
+        .join("")}</ul>
+    </div>
+  </section>`;
+}
+
+/* -------------------------------------------- learning (dark name tiles) */
+// phenom.com's "The Doers": names in dark tiles. Here, the institutions his
+// leadership and coaching learning comes from, set in type (their logos are
+// theirs). Each needs the client's confirmation before launch.
+
+function learning(ctx) {
+  const l = ctx.data.home.learning;
+  return `<section class="section section--dark dark learning" aria-labelledby="learning-title">
+    <div class="container">
+      <div class="learning__head">
+        <h2 class="learning__title" id="learning-title" data-anim="slide-up">${inline(l.headline)}</h2>
+        <p class="learning__line" data-anim="slide-up">${esc(l.line)}</p>
+      </div>
+      <ul class="learning__grid"${draft(l.draft)}>${l.items
+        .map(
+          (x, i) => `<li class="learning__tile" data-anim="slide-up" data-delay="${150 + i * 70}">
+          <p class="learning__name learning__name--${esc(x.style || "sans")}">${esc(x.name)}${x.sub ? `<span>${esc(x.sub)}</span>` : ""}</p>
+          <p class="learning__what">${esc(x.what)}</p>
         </li>`,
         )
         .join("")}</ul>
@@ -131,81 +177,44 @@ function why(ctx) {
   </section>`;
 }
 
-/* ----------------------------------------------- about (photo | panel) */
-
-function aboutSplit(ctx) {
-  const a = ctx.data.authors[ctx.data.site.defaultAuthor];
-  return `<section class="split" aria-labelledby="about-title">
-    <div class="split__media">${picture(ctx, "home-about", { alt: "Sanzid Ahmed in a blue shirt, smiling", sizes: "(min-width: 900px) 50vw, 100vw" })}</div>
-    <div class="split__panel dark">
-      <div class="split__inner">
-        <p class="tag" data-anim="slide-up">About the author</p>
-        <h2 class="split__title" id="about-title" data-anim="slide-up">${esc(a.name)}</h2>
-        <p class="split__role" data-anim="slide-up">${esc(a.descriptor)}</p>
-        <p data-anim="slide-up"${draft(true)}>${esc(a.shortBio)}</p>
-        <div data-anim="slide-up">${btn({ href: ctx.u("/about/"), label: "More about Sanzid", variant: "outline-light" })}</div>
-      </div>
-    </div>
-  </section>`;
-}
-
-/* -------------------------------------------------------------- topics */
-
-function topics(ctx) {
-  return `<section class="section section--soft" aria-labelledby="topics-title">
-    <div class="container">
-      ${sectionHead({
-        tagText: "Topics",
-        tagCls: "tag--white",
-        title: "Topics I write about",
-        intro: "Three themes, one question: how do capable people do their best work — and flourish while doing it?",
-        id: "topics-title",
-        draftFlag: true,
-      })}
-      ${themeCards(ctx)}
-    </div>
-  </section>`;
-}
-
-/* ---------------------------------------------------- exploring (sticky) */
+/* ---------------------------------------------- exploring (sticky swap) */
+// The words on the left swap as each picture on the right scrolls past
+// (motion.js, initExplore). Kept for the animation; the copy is one
+// question and one line per theme.
 
 function exploring(ctx) {
   const e = ctx.data.home.exploring;
   const items = ctx.data.home.exploringItems;
   const total = items.length + 1;
-  const counter = (i) => `<span class="explore__count">0${i + 1} / 0${total}</span>`;
+  const counter = (i) => `<p class="explore__count">0${i + 1} / 0${total}</p>`;
   const blocks = items.map(
     (x, i) => `<div class="explore__block" data-explore-block>
-        <p class="tag">What I’m exploring now ${counter(i)}</p>
+        ${counter(i)}
         <h3 class="h2 explore__title">${esc(x.title)}</h3>
         <p class="explore__note">${esc(x.note)}</p>
-        <ul class="explore__links">${x.linkItems
-          .map((it) => `<li><a class="link-arrow" href="${ctx.u(it.url)}">${esc(it.title)}${icon("arrow")}</a>${it.isPreview ? ' <span class="chip chip--preview">Preview</span>' : ""}</li>`)
-          .join("")}</ul>
+        ${x.linkItems[0] ? `<a class="link-arrow" href="${ctx.u(x.linkItems[0].url)}">Read the essay<span class="visually-hidden">: ${esc(x.linkItems[0].title)}</span>${icon("arrow")}</a>` : ""}
       </div>`,
   );
   blocks.push(`<div class="explore__block" data-explore-block>
-        <p class="tag">What I’m exploring now ${counter(items.length)}</p>
-        <h3 class="h2 explore__title">What should I explore next?</h3>
-        <p class="explore__note">${esc(e.invite || "A question from your own working life, a study worth reading, a book that changed your mind — suggestions shape what comes next.")}</p>
+        ${counter(items.length)}
+        <h3 class="h2 explore__title">${esc(e.inviteTitle)}</h3>
+        <p class="explore__note">${esc(e.invite)}</p>
         <div>${btn({ href: ctx.u("/contact/"), label: "Suggest a question" })}</div>
       </div>`);
 
   const cards = [
     ...items.map(
-      (x, i) => `<div class="explore-card" data-explore-card aria-hidden="true">
+      (x) => `<div class="explore-card" data-explore-card aria-hidden="true">
         ${x.linkItems[0] ? cover(ctx, x.linkItems[0]) : ""}
-        <span class="explore-card__label">Exploring · 0${i + 1}</span>
       </div>`,
     ),
     `<div class="explore-card explore-card--photo" data-explore-card>
         ${picture(ctx, "exploring", { alt: "Sanzid Ahmed sitting on a wooden garden bench, smiling", sizes: "(min-width: 992px) 46vw, 92vw" })}
-        <span class="explore-card__label" aria-hidden="true">Your question could be next</span>
       </div>`,
   ];
 
-  return `<section class="section explore" aria-labelledby="explore-title" data-explore${draft(e.draft, "Owner-editable — placeholder themes for Sanzid to replace")}>
-    <h2 class="visually-hidden" id="explore-title">What I’m exploring now</h2>
+  return `<section class="section explore" aria-labelledby="explore-title" data-explore${draft(e.draft)}>
+    <div class="container">${head(esc(e.headline), "explore-title")}</div>
     <div class="container explore__grid">
       <div class="explore__texts">
         <div class="explore__window" data-explore-window>
@@ -217,20 +226,23 @@ function exploring(ctx) {
   </section>`;
 }
 
-/* ------------------------------------------------- start here (pinned) */
+/* ------------------------------------------------ start here (numbered) */
 
 function startHere(ctx) {
   const s = ctx.data.home.startHere;
-  return `<section class="hscroll section--soft" id="start-here" aria-labelledby="start-title" data-hscroll>
-    <div class="hscroll__sticky" data-hscroll-sticky>
-      <div class="container">
-        ${sectionHead({ tagText: "Start here", tagCls: "tag--white", title: "New to Ignite2Flourish? Begin with these three.", intro: s.intro, id: "start-title", draftFlag: true })}
-      </div>
-      <div class="hscroll__viewport container" data-hscroll-viewport>
-        <ol class="hscroll__track" data-hscroll-track>${ctx.data.home.startHereItems
-          .map((a, i) => `<li class="hscroll__item" data-anim="slide-up" data-delay="${200 + i * 100}">${pathCard(ctx, a, { index: i })}</li>`)
-          .join("")}</ol>
-      </div>
+  return `<section class="section section--soft start-v5" id="start-here" aria-labelledby="start-title">
+    <div class="container">
+      ${head(esc(s.headline), "start-title")}
+      <ol class="start-list">${ctx.data.home.startHereItems
+        .map(
+          (a, i) => `<li data-anim="slide-up" data-delay="${150 + i * 100}"><a class="start-row" href="${ctx.u(a.url)}">
+          <span class="start-row__num">0${i + 1}</span>
+          <span class="start-row__theme mono">${esc(a.categoryObj.name)}</span>
+          <span class="start-row__title">${esc(a.title)}</span>
+          <span class="start-row__go">${a.minutes} min read${icon("arrow")}</span>
+        </a></li>`,
+        )
+        .join("")}</ol>
     </div>
   </section>`;
 }
@@ -238,12 +250,8 @@ function startHere(ctx) {
 /* ------------------------------------------------------ featured (dark) */
 
 function featured(ctx) {
-  const item = ctx.data.home.featuredItem;
-  return `<section class="section section--dark dark" aria-labelledby="featured-title">
-    <div class="container">
-      ${sectionHead({ tagText: "Featured", title: "An essay worth your time", id: "featured-title", draftFlag: true })}
-      ${featureCard(ctx, item, { headingTag: "h3" })}
-    </div>
+  return `<section class="section section--dark dark featured-v5" aria-label="Featured essay">
+    <div class="container">${featureCard(ctx, ctx.data.home.featuredItem, { headingTag: "h2" })}</div>
   </section>`;
 }
 
@@ -252,11 +260,10 @@ function featured(ctx) {
 function latest(ctx) {
   const { home, articles } = ctx.data;
   const items = articles.filter((a) => a !== home.featuredItem).slice(0, home.latestCount);
-  return `<section class="section" aria-labelledby="latest-title">
+  return `<section class="section latest-v5" aria-labelledby="latest-title">
     <div class="container">
-      ${sectionHead({ tagText: "Latest", title: "Latest writing", id: "latest-title" })}
+      ${head("Latest writing", "latest-title", { href: ctx.u("/ideas/"), label: "All ideas" })}
       <div class="post-grid">${items.map((a, i) => postCard(ctx, a, { index: i })).join("")}</div>
-      <div class="section-cta" data-anim="slide-up">${btn({ href: ctx.u("/ideas/"), label: "All ideas", variant: "ink" })}</div>
     </div>
   </section>`;
 }
@@ -276,7 +283,6 @@ function books(ctx) {
           <p class="kicker">Book review</p>
           <h3 class="bento__name"><a class="card-link" href="${ctx.u(book.url)}">${esc(book.book.title)}</a></h3>
           <p class="bento__role">${esc(authorsLine(book.book.authors))} · ${esc(book.book.publisher)}, ${book.book.year}</p>
-          <p class="bento__text">${esc(book.excerpt)}</p>
           ${preview(book)}
         </div>
       </article>`
@@ -290,18 +296,25 @@ function books(ctx) {
         ${preview(paper)}
       </article>`
     : "";
-  return `<section class="section section--soft" aria-labelledby="books-title">
+  return `<section class="section section--soft books-v5" aria-labelledby="books-title">
     <div class="container">
-      ${sectionHead({
-        tagText: "Books & Research",
-        tagCls: "tag--white",
-        title: "Close readings of the books and studies that shape how we work",
-        id: "books-title",
-        draftFlag: true,
-      })}
+      ${head("Books &amp; research", "books-title", { href: ctx.u("/books-research/"), label: "All reviews" })}
       <div class="bento">${bookCell}${paperCell}</div>
-      ${reviews.every((r) => r.isPreview) ? `<p class="note" role="note">${icon("book")}<span>The first reviews are in preparation. Entries marked “Layout preview” show how books and research will be presented: their bibliographic details are real, their review text is not yet written.</span></p>` : ""}
-      <div class="section-cta" data-anim="slide-up">${btn({ href: ctx.u("/books-research/"), label: "Browse books & research", variant: "ink" })}</div>
+    </div>
+  </section>`;
+}
+
+/* ------------------------------------------------------------ closing */
+// phenom.com's "Take the first step": one line, one sentence, one button.
+
+function closing(ctx) {
+  const c = ctx.data.home.closing;
+  return `<section class="section closing" aria-labelledby="closing-title">
+    <div class="container closing__inner">
+      <span class="closing__mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <h2 class="closing__title" id="closing-title" data-anim="slide-up"${draft(c.draft)}>${inline(c.headline)}</h2>
+      <p class="closing__line" data-anim="slide-up">${esc(c.line)}</p>
+      <div data-anim="slide-up">${btn({ href: ctx.u(c.cta.href), label: c.cta.label })}</div>
     </div>
   </section>`;
 }
@@ -311,7 +324,7 @@ export function homePage(ctx) {
   const author = authors[site.defaultAuthor];
   return {
     path: "/",
-    fullTitle: `${site.name} — ${site.tagline}`,
+    fullTitle: `${site.name} | ${site.tagline}`,
     description: site.description,
     bodyClass: "page-home",
     jsonld: [
@@ -335,15 +348,16 @@ export function homePage(ctx) {
       `<div class="curtain" data-curtain>`,
       CAP,
       ticker(ctx),
-      why(ctx),
-      aboutSplit(ctx),
+      numbers(ctx),
+      about(ctx),
       topics(ctx),
+      learning(ctx),
       exploring(ctx),
       startHere(ctx),
       featured(ctx),
       latest(ctx),
       books(ctx),
-      `<div class="section"><div class="container">${conversationBlock(ctx)}</div></div>`,
+      closing(ctx),
       `</div>`,
     ].join("\n"),
   };

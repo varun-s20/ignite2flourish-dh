@@ -39,7 +39,7 @@ function previewNotice(item) {
   if (!item.isPreview) return "";
   const what = item.type === "book-review" ? "book" : "paper";
   return `<div class="notice notice--preview review-notice" role="note">
-    <p><strong>Layout preview — not a published review.</strong> The ${what}’s bibliographic details are accurate and were verified against public records. The section text below is placeholder guidance showing what each part of a review will contain.</p>
+    <p><strong>Layout preview, not a published review.</strong> The ${what}’s bibliographic details are accurate and were verified against public records. The section text below is placeholder guidance showing what each part of a review will contain.</p>
   </div>`;
 }
 
@@ -128,7 +128,7 @@ function body(ctx, item) {
 
 export function reviewPage(ctx, item) {
   const isBook = item.type === "book-review";
-  const title = isBook ? `${item.book.title} by ${item.book.authors.join(", ")} — Book review` : `${item.title} — Research review`;
+  const title = isBook ? `${item.book.title} by ${item.book.authors.join(", ")} | Book review` : `${item.title} | Research review`;
   const heading = isBook ? item.book.title : item.paper.title;
   const by = isBook
     ? `by ${esc(authorsLine(item.book.authors))} · ${esc(item.book.publisher)}, ${item.book.year}`

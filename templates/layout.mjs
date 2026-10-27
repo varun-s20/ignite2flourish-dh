@@ -10,7 +10,7 @@ const logo = (ctx, { reversed = true, lazy = false, height = 48 } = {}) => {
   const name = reversed ? "ignite2flourish-logo-reversed" : "ignite2flourish-logo";
   const set = (ext) => `${ctx.u(`/assets/logo/${name}-180.${ext}`)} 180w, ${ctx.u(`/assets/logo/${name}-360.${ext}`)} 360w`;
   const w = Math.round((height * 1532) / 899);
-  return `<picture><source type="image/webp" srcset="${set("webp")}" sizes="${w}px"><img src="${ctx.u(`/assets/logo/${name}-360.png`)}" srcset="${set("png")}" sizes="${w}px" width="${w}" height="${height}" alt="Ignite2Flourish — home"${lazy ? ' loading="lazy" decoding="async"' : ""}></picture>`;
+  return `<picture><source type="image/webp" srcset="${set("webp")}" sizes="${w}px"><img src="${ctx.u(`/assets/logo/${name}-360.png`)}" srcset="${set("png")}" sizes="${w}px" width="${w}" height="${height}" alt="Ignite2Flourish home"${lazy ? ' loading="lazy" decoding="async"' : ""}></picture>`;
 };
 
 const isCurrent = (path, item, data) => {
@@ -133,7 +133,7 @@ const NO_FLASH = `(function(d,h){h.classList.add("js");try{if(!matchMedia("(pref
  */
 export function layout(ctx, page) {
   const { site } = ctx.data;
-  const title = page.fullTitle || (page.title ? `${page.title} — ${site.name}` : `${site.name} — ${site.tagline}`);
+  const title = page.fullTitle || (page.title ? `${page.title} | ${site.name}` : `${site.name} | ${site.tagline}`);
   const description = page.description || site.description;
   const canonical = ctx.abs(page.path);
   const ogImage = ctx.abs(page.ogImage || site.defaultOgImage);
@@ -180,7 +180,7 @@ export function layout(ctx, page) {
   <meta property="og:image" content="${esc(ogImage)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="${esc(page.ogImageAlt || `${page.title || site.name} — ${site.name}`)}">
+  <meta property="og:image:alt" content="${esc(page.ogImageAlt || `${page.title || site.name} | ${site.name}`)}">
   <meta name="twitter:card" content="summary_large_image">
   ${article}
   ${jsonld}

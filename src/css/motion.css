@@ -45,8 +45,18 @@
   animation: g-halo 2.8s var(--ease-out-quart) 0.2s backwards;
   transform-origin: 50% 50%;
 }
-.motion .gravity__orb {
-  opacity: 0;
+/* the brand mark rises in after him, then its light breathes slowly */
+.motion .gravity__brand picture {
+  animation: g-rise 1.4s var(--ease-out-quart) 0.9s backwards;
+}
+.motion .gravity__brand-glow {
+  animation: g-breathe 5s ease-in-out 2.3s infinite;
+}
+@keyframes g-breathe {
+  50% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(1.12);
+  }
 }
 @keyframes g-rise {
   from {
@@ -112,8 +122,9 @@
 .motion .shelf__sun {
   animation: s-rise 1.6s var(--ease-out-quart) 0.3s backwards;
 }
-.motion .shelf__slot {
-  animation: s-deal 1s var(--ease-out-quart) calc(0.55s + var(--i) * 0.1s) backwards;
+/* the books drop onto the shelf one by one */
+.motion .b3d {
+  animation: s-drop 1s var(--ease-out-quart) calc(0.55s + var(--i) * 0.12s) backwards;
 }
 @keyframes s-rise {
   from {
@@ -121,10 +132,10 @@
     transform: translateY(45%) scale(0.8);
   }
 }
-@keyframes s-deal {
+@keyframes s-drop {
   from {
     opacity: 0;
-    transform: translateX(calc(var(--x) - 50%)) translateY(30cqi) rotate(0deg);
+    transform: translateY(-28cqi) rotateX(-20deg);
   }
 }
 
