@@ -127,36 +127,37 @@
 }
 
 /* the brand mark: the logo's symbol in the column right of the figure,
-   above the facts, with a warm light behind it. It lifts as the curtain
-   rises. */
+   with a warm light behind it. Its bottom sits a fixed gap above the facts
+   (which start at --fh * 0.5 from the bottom), so the two never meet. It
+   lifts as the curtain rises. Not shown on phones. */
 .gravity__brand {
   position: absolute;
   z-index: 3;
   left: calc(var(--fig-x) + var(--fh) * 0.3555 + 24px);
   right: var(--edge);
-  top: calc(var(--header-h) + (100% - var(--header-h)) * 0.08);
-  display: grid;
-  place-items: center;
-  height: calc(var(--fh) * 0.34);
+  bottom: calc(var(--fh) * 0.5 + clamp(28px, 5vh, 52px));
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
   pointer-events: none;
   opacity: calc(1 - var(--gp) * 1.6);
   transform: translateY(calc(var(--gp) * -14vh));
 }
 .gravity__brand picture {
   position: relative;
-  height: 100%;
+  display: block;
 }
 .gravity__brand-img {
   display: block;
   width: auto;
-  height: 100%;
+  height: calc(var(--fh) * 0.22);
   filter: drop-shadow(0 10px 30px rgba(227, 76, 32, 0.35));
 }
 .gravity__brand-glow {
   position: absolute;
   left: 50%;
   top: 52%;
-  width: calc(var(--fh) * 0.42);
+  width: calc(var(--fh) * 0.3);
   aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(255, 217, 0, 0.28), rgba(227, 76, 32, 0.12) 55%, rgba(227, 76, 32, 0) 100%);
@@ -339,17 +340,8 @@
   .gravity__foot-inner {
     padding-block: 6px;
   }
-  /* the mark sits beside the headline, top right */
   .gravity__brand {
-    left: auto;
-    right: var(--gutter);
-    top: calc(var(--header-h) + clamp(24px, 6vw, 52px));
-    height: clamp(64px, 17vw, 130px);
-    opacity: 1;
-    transform: none;
-  }
-  .gravity__brand-glow {
-    width: 180%;
+    display: none;
   }
 }
 @media (max-width: 479px) {
@@ -837,10 +829,11 @@ svg.num-card__art--years .is-now {
   background: rgba(255, 255, 255, 0.06);
   transform: translateY(-4px);
 }
+/* every institution in the same face, size and weight */
 .learning__name {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   color: #fff;
   font-size: clamp(1.1rem, 0.85rem + 0.75vw, 1.5rem);
   font-weight: 500;
@@ -848,22 +841,9 @@ svg.num-card__art--years .is-now {
 }
 .learning__name span {
   margin-top: 4px;
-  font-size: 0.72em;
+  color: var(--on-dark-muted);
+  font-size: 0.875rem;
   font-weight: 400;
-  opacity: 0.72;
-}
-.learning__name--serif {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 400;
-}
-.learning__name--caps {
-  font-size: clamp(0.92rem, 0.75rem + 0.5vw, 1.15rem);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.learning__name--round {
-  font-weight: 600;
-  letter-spacing: -0.02em;
 }
 .learning__what {
   padding-top: 14px;
@@ -897,9 +877,6 @@ svg.num-card__art--years .is-now {
   .learning__name span {
     display: block;
     margin-top: 2px;
-  }
-  .learning__name--caps {
-    font-size: 0.95rem;
   }
   .learning__what {
     padding-top: 0;

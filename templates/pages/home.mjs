@@ -57,7 +57,7 @@ function hero(ctx) {
     </div>
     <div class="gravity__brand" aria-hidden="true">
       <span class="gravity__brand-glow"></span>
-      <picture><source type="image/webp" srcset="${ctx.u("/assets/logo/ignite2flourish-symbol-360.webp")} 198w, ${ctx.u("/assets/logo/ignite2flourish-symbol-720.webp")} 395w" sizes="(min-width: 900px) 12vw, 60px"><img class="gravity__brand-img" src="${ctx.u("/assets/logo/ignite2flourish-symbol-720.png")}" width="395" height="720" alt=""></picture>
+      <picture><source type="image/webp" srcset="${ctx.u("/assets/logo/ignite2flourish-symbol-360.webp")} 198w, ${ctx.u("/assets/logo/ignite2flourish-symbol-720.webp")} 395w" sizes="(min-width: 900px) 9vw, 1px"><img class="gravity__brand-img" src="${ctx.u("/assets/logo/ignite2flourish-symbol-720.png")}" width="395" height="720" alt=""></picture>
     </div>
     <div class="container gravity__inner">
       <div class="gravity__intro"${draft(h.draft)}>
@@ -169,7 +169,7 @@ function learning(ctx) {
         .map(
           (x, i) => `<li class="learning__tile" data-anim="slide-up" data-delay="${150 + i * 70}">
           <span class="learning__icon" aria-hidden="true">${icon(x.icon || "cap")}</span>
-          <p class="learning__name learning__name--${esc(x.style || "sans")}">${esc(x.name)}${x.sub ? `<span>${esc(x.sub)}</span>` : ""}</p>
+          <p class="learning__name">${esc(x.name)}${x.sub ? `<span>${esc(x.sub)}</span>` : ""}</p>
           <p class="learning__what">${esc(x.what)}</p>
         </li>`,
         )
