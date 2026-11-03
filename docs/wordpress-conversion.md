@@ -34,7 +34,7 @@ This build was designed to drop into WordPress with as little rework as possible
 | `<section data-part="…">` blocks | One ACF WYSIWYG field per part (argument, ideas, takeaways, assessment, audience / question, method, findings, limitations, relevance, interpretation). The template keeps findings and interpretation in separate panels. |
 | `verdict`, `bestFor` | ACF text fields |
 | `content/authors.json` | WordPress user profile + ACF (descriptor, short bio, LinkedIn); avatar from the media library |
-| `content/taxonomy.json` | Categories (Work & Leadership, Career & Life, Flourishing) with descriptions; tag list |
+| `content/taxonomy.json` | Categories (Organisations & Leadership, Career & Life, Flourishing; the first keeps the slug `work-leadership`) with descriptions; tag list |
 | `content/site.json › home` | ACF **Options page "Home"**: hero copy, Featured post (relationship), Start Here (3 × relationship), What I'm Exploring Now (2 × title / note / related items) — the "owner-editable" items in the proposal |
 | `content/pages/about.html` | About page; facts, expertise, philosophy, credentials as ACF fields |
 | `content/redirects.json` | Redirection plugin (import `migration/redirects.csv`) or server rules |
@@ -46,7 +46,7 @@ Permalink settings: post name; category base `ideas` (gives `/ideas/flourishing/
 | Feature | Static preview | WordPress |
 |---|---|---|
 | Contact form | Validates; with no endpoint it states clearly that nothing was sent | Fluent Forms / Gravity Forms / CF7 with the same field names (`name`, `email`, `organisation`, `subject`, `message`, honeypot `website`). Submissions emailed (WP Mail SMTP with an authenticated sender) **and** stored. Spam: honeypot + Cloudflare Turnstile or Akismet. Either keep `forms.js` and point `data-endpoint` at the form plugin's REST endpoint, or use the plugin's markup with this CSS. |
-| Public responses (comments) | Designed and validated; preview stores nothing | Native comments with "Comment must be manually approved"; render with this markup in `comments.php`. Email and name required; email never shown. |
+| Public responses (comments) | Off by default; an essay switches them on with `"responses": true` (preview stores nothing) | Native comments, as the client specified: off by default (Settings › Discussion: untick "Allow people to submit comments on new posts"), switched on per post in its Discussion panel, "Comment must be manually approved", spam filtered by Akismet or Antispam Bee. Render with this markup in `comments.php`. Email and name required; email never shown. |
 | Site search | Client-side over `search-index.json` | Native `?s=` (or Relevanssi for weighting). Keep the dialog: either request `/?s=` HTML or expose a small REST route that returns the same JSON shape. |
 | Archive in-page search / load-more | Client-side over the rendered list | Keep as-is (works on any server-rendered list), or swap load-more for REST pagination if the archive grows past ~100 posts |
 | Generative covers | SVG files written at build time | Port `templates/art.mjs` to PHP (it is deterministic — same seed, same art) or pre-generate one SVG per post and store it as post meta/attachment |

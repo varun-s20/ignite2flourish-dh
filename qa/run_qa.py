@@ -75,7 +75,7 @@ def main():
         page.goto(BASE + "/about/", wait_until="networkidle")
         check("nav marks the current section", page.locator(".site-nav [aria-current=page] .roll__in").first.inner_text() == "About")
         page.goto(BASE + "/rethinking-recruitment-moving-beyond-experience-bias/", wait_until="networkidle")
-        check("articles highlight Ideas in the nav", page.locator(".site-nav [aria-current=page] .roll__in").first.inner_text() == "Ideas")
+        check("articles highlight Ideas at Work in the nav", page.locator(".site-nav [aria-current=page] .roll__in").first.inner_text() == "Ideas at Work")
 
         # ---------------------------------------------------- header on scroll
         page.goto(BASE + "/ideas/", wait_until="networkidle")
@@ -195,6 +195,8 @@ def main():
 
         # ----------------------------------------------- responses (comments)
         page.goto(BASE + "/3-tips-to-build-resilience/", wait_until="networkidle")
+        check("responses are off unless an essay switches them on", page.locator(".responses").count() == 0)
+        page.goto(BASE + "/rethinking-recruitment-moving-beyond-experience-bias/", wait_until="networkidle")
         page.click(".responses__compose summary")
         page.fill("[data-form=response] [name=name]", "Reader")
         page.fill("[data-form=response] [name=email]", "reader@example.com")

@@ -191,7 +191,7 @@ Both forms (Continue the Conversation, and article Responses) use the same scrip
 
 Spam protection, email delivery and storage must happen on the server; see the WordPress notes.
 
-**Public responses (comments)** need a moderated backend. The design, validation and moderation messaging are built, but nothing is stored or published until WordPress comments, or another backend, are connected.
+**Public responses (comments)** are off by default. An essay opens them with `"responses": true` in its front matter (in the preview, only "Rethinking Recruitment" does). They need a moderated backend: the design, validation and moderation messaging are built, but nothing is stored or published until WordPress comments, or another backend, are connected.
 
 ## Environments and SEO
 

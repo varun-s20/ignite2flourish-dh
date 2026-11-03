@@ -16,7 +16,7 @@
 //   closing     one line and one button (phenom's "Take the first step")
 
 import { esc, inline } from "../../scripts/lib/util.mjs";
-import { authorsLine, btn, cover, coverStage, draft, featureCard, icon, linkedinIcon, marquee, numCards, odometer, picture, postCard } from "../components.mjs";
+import { authorsLine, btn, cover, coverStage, draft, essays, featureCard, icon, linkedinIcon, marquee, numCards, odometer, picture, postCard } from "../components.mjs";
 
 /* A heading with an optional link on the right; nothing above or below. */
 const head = (title, id, link) =>
@@ -73,8 +73,8 @@ function hero(ctx) {
     </div>
     <div class="gravity__foot">
       <div class="container gravity__foot-inner">
-        <p class="gravity__name" data-anim="blur-in" data-delay="1350"><strong>${esc(author.name)}</strong><span>${esc(author.descriptor)}</span></p>
-        <a class="gravity__social" href="${esc(author.linkedin)}" target="_blank" rel="noopener" data-anim="blur-in" data-delay="1350">${linkedinIcon()}<span>LinkedIn</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+        <p class="gravity__name" data-anim="blur-in" data-delay="1350"><strong>${esc(author.name)}</strong><span class="gravity__sep" aria-hidden="true">·</span><span>${esc(author.descriptor)}</span></p>
+        <a class="gravity__social" href="${esc(author.linkedin)}" target="_blank" rel="noopener" data-anim="blur-in" data-delay="1350">${linkedinIcon()}<span class="gravity__social-label">LinkedIn</span><span class="visually-hidden"> (opens in a new tab)</span></a>
       </div>
     </div>
   </section>`;
@@ -144,7 +144,7 @@ function topics(ctx) {
           (c, i) => `<li data-anim="slide-up" data-delay="${150 + i * 90}"><a class="topic-row topic-row--${esc(c.slug)}" href="${ctx.u(c.url)}">
           <span class="topic-row__icon">${icon(TOPIC_ICONS[c.slug] || "flame")}</span>
           <span class="topic-row__body"><span class="topic-row__name">${esc(c.name)}</span><span class="topic-row__text">${esc(c.description)}</span></span>
-          <span class="topic-row__meta"><span>${c.items.length} essays</span>${icon("chevron")}</span>
+          <span class="topic-row__meta"><span>${essays(c.items.length)}</span>${icon("chevron")}</span>
         </a></li>`,
         )
         .join("")}</ul>

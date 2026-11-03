@@ -1,20 +1,20 @@
 {
   "categories": {
     "work-leadership": {
-      "name": "Work & Leadership",
-      "description": "Decision-making, hiring, culture and the everyday practice of leading people well.",
+      "name": "Organisations & Leadership",
+      "description": "Organisational transformation, talent management, engagement and employee relations, from 15+ years at the executive table.",
       "motif": "structure",
       "order": 1
     },
     "career-life": {
       "name": "Career & Life",
-      "description": "Goals, momentum and growth for professionals who want to progress, or feel a little stuck.",
+      "description": "Goals, momentum and managing a career across borders, for professionals asking what comes next.",
       "motif": "path",
       "order": 2
     },
     "flourishing": {
       "name": "Flourishing",
-      "description": "Wellbeing, self-awareness and positive psychology, and what helps people thrive.",
+      "description": "Wellbeing, self-awareness and positive psychology: what the research says, and what actually helps people flourish.",
       "motif": "bloom",
       "order": 3
     }

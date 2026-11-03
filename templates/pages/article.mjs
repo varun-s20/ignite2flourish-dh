@@ -11,6 +11,7 @@ import {
   conversationBlock,
   cover,
   icon,
+  ideasLabel,
   kicker,
   postCard,
   responses,
@@ -74,9 +75,10 @@ function sources(item) {
 
 export function articlePage(ctx, item) {
   const c = item.categoryObj;
+  const ideas = ideasLabel(ctx);
   const trail = [
     { label: "Home", href: "/" },
-    { label: "Ideas", href: "/ideas/" },
+    { label: ideas, href: "/ideas/" },
     { label: c.name, href: c.url },
     { label: item.title, href: item.url },
   ];
@@ -88,7 +90,7 @@ export function articlePage(ctx, item) {
     <header class="article-hero dark">
       <div class="container container--narrow">
         <div class="article-hero__top" data-anim="blur-in" data-delay="100">
-          ${btn({ href: ctx.u("/ideas/"), label: "Back to Ideas", back: true, variant: "dark" })}
+          ${btn({ href: ctx.u("/ideas/"), label: `Back to ${ideas}`, back: true, variant: "dark" })}
           ${breadcrumbs(ctx, trail)}
         </div>
         <div class="article-hero__text" data-anim="blur-in" data-delay="150">
@@ -113,7 +115,7 @@ export function articlePage(ctx, item) {
       ${authorBox(ctx, item.authorObj)}
     </div>
     <div class="container container--narrow article-conversation">${conversationBlock(ctx, { item, compact: true })}</div>
-    <div class="container container--read">${responses(ctx, item)}</div>
+    ${item.responses ? `<div class="container container--read">${responses(ctx, item)}</div>` : ""}
   </article>
   ${related(ctx, item)}`;
 

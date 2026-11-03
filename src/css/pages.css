@@ -255,7 +255,7 @@
 .gravity__name {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px 12px;
+  gap: 2px 10px;
   font-size: 0.9375rem;
 }
 .gravity__name strong {
@@ -344,9 +344,33 @@
     display: none;
   }
 }
+/* phones: the foot row is a small caption over the bottom of the photo,
+   name and role on one line; LinkedIn keeps only its logo (the word stays
+   for screen readers) so the caption fits without adding height */
 @media (max-width: 479px) {
-  .gravity__name span {
-    display: none;
+  .gravity__foot-inner {
+    gap: 12px;
+  }
+  .gravity__name {
+    gap: 0 6px;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+  }
+  .gravity__social {
+    justify-content: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    margin-right: -13px;
+    padding: 0;
+  }
+  .gravity__social-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 }
 
@@ -708,14 +732,12 @@ svg.num-card__art--years .is-now {
   line-height: 1.2;
   transition: color 0.3s var(--ease);
 }
+/* the client's own words for each theme: shown in full, never clipped */
 .topic-row__text {
-  display: -webkit-box;
+  display: block;
   max-width: 52ch;
-  overflow: hidden;
   color: var(--muted);
   line-height: 1.5;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 }
 .topic-row__meta {
   display: inline-flex;
@@ -1690,6 +1712,16 @@ svg.num-card__art--years .is-now {
   color: var(--on-dark-faint);
   font-size: 0.8125rem;
 }
+/* in a small orbit a long theme name takes two lines rather than run
+   past the edge of the screen */
+@container (max-width: 459px) {
+  .orbit__name {
+    width: max-content;
+    max-width: 38cqi;
+    white-space: normal;
+    text-wrap: balance;
+  }
+}
 /* the upper bodies carry their labels above, the lowest one beside it */
 .orbit__body--above .orbit__link {
   translate: -50% calc(-100% + var(--sz) / 2);
@@ -2352,16 +2384,6 @@ svg.num-card__art--years .is-now {
   letter-spacing: -0.015em;
   color: var(--ink);
 }
-.quote blockquote {
-  margin: 0;
-}
-.quote figcaption {
-  color: var(--muted);
-}
-.quote figcaption::before {
-  content: "— ";
-}
-
 .principles {
   display: grid;
   gap: 20px;

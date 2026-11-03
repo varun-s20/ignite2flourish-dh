@@ -10,7 +10,7 @@
 // convex edge. Topic pages keep the plain dark header.
 
 import { esc } from "../../scripts/lib/util.mjs";
-import { archiveSearch, bookCover, breadcrumbs, emptyState, icon, loadMore, paperCard, postCard, reviewRow, tabs } from "../components.mjs";
+import { archiveSearch, bookCover, breadcrumbs, emptyState, essays, icon, ideasLabel, loadMore, paperCard, postCard, reviewRow, tabs } from "../components.mjs";
 
 function head(ctx, o) {
   return `<div class="page-hero__head">
@@ -41,14 +41,14 @@ const ORBIT = [
 function themeOrbit(ctx, currentSlug) {
   const { categories, articles } = ctx.data;
   const here = (on) => (on ? ' aria-current="page"' : "");
-  return `<nav class="orbit" aria-label="Ideas by theme" data-anim="blur-in" data-delay="200">
+  return `<nav class="orbit" aria-label="${esc(ideasLabel(ctx))} by theme" data-anim="blur-in" data-delay="200">
     <svg class="orbit__rings" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="49.5"/></svg>
     <a class="orbit__core" href="${ctx.u("/ideas/")}"${here(!currentSlug)}><span class="orbit__core-num">${articles.length}</span><span class="orbit__core-label">essays</span><span class="visually-hidden">: all ideas</span></a>
     <ul class="orbit__list">${categories
       .map((c, i) => {
         const o = ORBIT[i % ORBIT.length];
         return `<li class="orbit__body orbit__body--${o.shape} orbit__body--${o.side}" style="--a:${o.angle}deg;--i:${i}">
-        <a class="orbit__link" href="${ctx.u(c.url)}"${here(c.slug === currentSlug)}><span class="orbit__shape" aria-hidden="true"></span><span class="orbit__label"><span class="orbit__name">${esc(c.name)}</span><span class="orbit__count">${c.items.length} essays</span></span></a>
+        <a class="orbit__link" href="${ctx.u(c.url)}"${here(c.slug === currentSlug)}><span class="orbit__shape" aria-hidden="true"></span><span class="orbit__label"><span class="orbit__name">${esc(c.name)}</span><span class="orbit__count">${essays(c.items.length)}</span></span></a>
       </li>`;
       })
       .join("")}</ul>
@@ -159,20 +159,20 @@ export function ideasPages(ctx) {
     { label: "All", href: "/ideas/", value: "all", count: articles.length },
     ...categories.map((c) => ({ label: c.name, href: c.url, value: c.slug, count: c.items.length })),
   ];
+  const ideas = ideasLabel(ctx);
   const intro =
     "Essays and practical notes on leadership, careers and flourishing at work, drawn from 22 years in HR and tested against research.";
   const pages = [
     {
       path: "/ideas/",
-      title: "Ideas",
-      description: "All articles on Ignite2Flourish: work and leadership, career and life, and flourishing.",
+      title: ideas,
+      description: "All articles on Ignite2Flourish: organisations and leadership, career and life, and flourishing.",
       bodyClass: "page-archive page-ideas",
-      jsonld: [collection(ctx, "/ideas/", "Ideas", intro, articles)],
+      jsonld: [collection(ctx, "/ideas/", ideas, intro, articles)],
       content: postArchive(ctx, {
-        eyebrow: `Ideas · ${articles.length} essays`,
-        title: "Ideas",
+        eyebrow: `${ideas} · ${essays(articles.length)}`,
+        title: ideas,
         intro,
-        draftIntro: true,
         items: articles,
         orbit: { current: null },
         latest: { label: "Latest essay", item: articles[0] },
@@ -186,22 +186,22 @@ export function ideasPages(ctx) {
     },
   ];
   for (const c of categories) {
+    const description = `${c.description} Articles on ${c.name.toLowerCase()} from Ignite2Flourish.`;
     pages.push({
       path: c.url,
-      title: `${c.name} | Ideas`,
-      description: `${c.description} Articles on ${c.name.toLowerCase()} from Ignite2Flourish.`,
+      title: `${c.name} | ${ideas}`,
+      description: description.length > 160 ? c.description : description,
       bodyClass: `page-archive page-ideas page-category-${c.slug}`,
       jsonld: [collection(ctx, c.url, c.name, c.description, c.items)],
       content: postArchive(ctx, {
         trail: [
           { label: "Home", href: "/" },
-          { label: "Ideas", href: "/ideas/" },
+          { label: ideas, href: "/ideas/" },
           { label: c.name, href: c.url },
         ],
-        eyebrow: `Theme · ${c.items.length} essays`,
+        eyebrow: `Theme · ${essays(c.items.length)}`,
         title: c.name,
         intro: c.description,
-        draftIntro: true,
         items: c.items,
         orbit: { current: c.slug },
         latest: c.items.length ? { label: `Latest in ${c.name}`, item: c.items[0] } : null,
@@ -227,7 +227,7 @@ export function tagPages(ctx) {
     content: postArchive(ctx, {
       trail: [
         { label: "Home", href: "/" },
-        { label: "Ideas", href: "/ideas/" },
+        { label: ideasLabel(ctx), href: "/ideas/" },
         { label: t.name, href: t.url },
       ],
       eyebrow: "Topic",

@@ -368,6 +368,12 @@ export function share(ctx, item, { label = "Share" } = {}) {
   </div>`;
 }
 
+/** "1 essay", "12 essays" */
+export const essays = (n) => `${n} ${n === 1 ? "essay" : "essays"}`;
+
+/** The articles section's name, as it reads in the menu ("Ideas at Work"). */
+export const ideasLabel = (ctx) => ctx.data.site.nav.find((n) => n.href === "/ideas/")?.label || "Ideas";
+
 export function breadcrumbs(ctx, trail, { light = false } = {}) {
   return `<nav class="${cx("breadcrumbs", light && "breadcrumbs--light")}" aria-label="Breadcrumb"><ol>${trail
     .map((c, i) =>

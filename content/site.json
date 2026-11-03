@@ -12,7 +12,7 @@
   "defaultOgImage": "/assets/images/og-default.jpg",
   "nav": [
     {
-      "label": "Ideas",
+      "label": "Ideas at Work",
       "href": "/ideas/",
       "match": [
         "/ideas/",
@@ -59,10 +59,10 @@
   "home": {
     "hero": {
       "eyebrow": "Ideas for a more thoughtful working life",
-      "headline": "A more thoughtful way to *flourish* at work.",
-      "lede": "Ideas on leadership, careers and growth, from 22 years in HR.",
+      "headline": "What does it mean to *flourish* at work?",
+      "lede": "Ideas on leadership, careers and growth, from 20+ years local, regional and global experience.",
       "primary": {
-        "label": "Explore the latest ideas",
+        "label": "Step inside my thinking",
         "href": "/ideas/"
       },
       "secondary": {
@@ -70,8 +70,9 @@
         "href": "/books-research/"
       },
       "portrait": "hero",
-      "caption": "Sanzid Ahmed, Senior HR & People Leader",
-      "draft": true,
+      "caption": "Sanzid Ahmed · Senior HR & People Leader",
+      "draft": false,
+      "_note": "Headline, lede, button and caption are the client's copy (brief of 31 Oct 2026).",
       "facts": [
         {
           "icon": "briefcase",
@@ -225,7 +226,7 @@
             "href": "/"
           },
           {
-            "label": "Ideas",
+            "label": "Ideas at Work",
             "href": "/ideas/"
           },
           {
@@ -246,7 +247,7 @@
         "title": "Themes",
         "links": [
           {
-            "label": "Work & Leadership",
+            "label": "Organisations & Leadership",
             "href": "/ideas/work-leadership/"
           },
           {

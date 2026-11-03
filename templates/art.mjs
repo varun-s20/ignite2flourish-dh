@@ -4,7 +4,7 @@
 // Output is a standalone SVG file referenced with <img>.
 //
 //   bloom      Flourishing        a sun rising over still water, rays and rings
-//   structure  Work & Leadership  a colonnade of arches, one lit from within
+//   structure  Organisations & Leadership  a colonnade of arches, one lit from within
 //   path       Career & Life      a ribbon of lines travelling to a destination
 
 import { rng } from "../scripts/lib/util.mjs";

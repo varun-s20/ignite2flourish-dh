@@ -7,7 +7,7 @@
   var I2F = window.I2F;
 
   var TYPE_LABEL = { article: "Article", "book-review": "Book review", "research-review": "Research review" };
-  var CAT_SLUG = { "Work & Leadership": "work-leadership", "Career & Life": "career-life", Flourishing: "flourishing" };
+  var CAT_SLUG = { "Organisations & Leadership": "work-leadership", "Career & Life": "career-life", Flourishing: "flourishing" };
 
   var index = null;
   var loading = null;

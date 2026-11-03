@@ -88,11 +88,10 @@ export function aboutPage(ctx) {
     <div class="container">
       <div class="split-head">
         <h2 class="h2" id="philosophy-title" data-anim="slide-up">Philosophy</h2>
-        <figure class="split-head__body quote">
-          <blockquote><p class="why__statement" data-reveal-chars>${esc(p.philosophy.quote)}</p></blockquote>
-          <figcaption data-anim="slide-up">${esc(p.philosophy.attribution)}</figcaption>
-          <p class="split-head__text" data-anim="slide-up"${note}>${esc(p.philosophy.text)}</p>
-        </figure>
+        <div class="split-head__body">
+          <p class="why__statement" data-reveal-chars>${esc(p.philosophy.statement)}</p>
+          ${p.philosophy.text.map((t) => `<p class="split-head__text" data-anim="slide-up"${note}>${esc(t)}</p>`).join("")}
+        </div>
       </div>
     </div>
   </section>
@@ -253,7 +252,7 @@ export function contactPage(ctx) {
         { q: "Is my message private?", a: `<p>${esc(p.privateNote)}</p>` },
         {
           q: "Can I respond to an article publicly?",
-          a: `<p>Yes. Each article has a Responses section; public responses are moderated and appear once approved. Use this form for anything you would rather keep private.</p><a class="link-arrow" href="${ctx.u("/ideas/")}">Browse the ideas${icon("arrow")}</a>`,
+          a: `<p>Yes, on essays open for responses. Public responses are moderated and appear only once approved. Use this form for anything you would rather keep private.</p><a class="link-arrow" href="${ctx.u("/ideas/")}">Browse the ideas${icon("arrow")}</a>`,
         },
         {
           q: "What kinds of conversation are welcome?",

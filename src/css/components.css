@@ -837,7 +837,6 @@ a.kicker:hover {
   width: min(100%, 230px);
   aspect-ratio: 1;
   margin: 0 auto 22px;
-  padding: 12%;
   border-radius: 50%;
   background: var(--orb, var(--navy));
   color: #fff;
@@ -845,7 +844,14 @@ a.kicker:hover {
   font-size: clamp(1.4rem, 1.1rem + 0.9vw, 1.9rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
+  container-type: inline-size;
   transition: transform 0.6s var(--ease-out-back);
+}
+/* never wider than the circle: "Organisations" is the longest word */
+.theme-card__orb > span {
+  max-width: 80%;
+  font-size: min(1em, 13cqi);
+  text-wrap: balance;
 }
 .theme-card:hover .theme-card__orb {
   transform: scale(1.05);
